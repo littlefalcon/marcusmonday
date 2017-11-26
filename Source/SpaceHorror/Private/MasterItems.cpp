@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.RunningTime
+// Copyright (c) 2017 LittleFalcon.RunningTime
 
 #include "MasterItems.h"
 

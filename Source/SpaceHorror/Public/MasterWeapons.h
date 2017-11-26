@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright (c) 2017 LittleFalcon.
 
 #pragma once
 
@@ -32,9 +32,36 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void switchWeapon(FString weaponSlot);
+	
+	//Set weapon fire
+	void onFire();
+
+	//Get base damage
+	float getBaseDamage();
+
 private:
+
+	///DYNAMIC VARIABLES
+	//Current Ammo
+	UPROPERTY(EditAnywhere, Category = "Current Weapon Status")
+		int currentAmmo;
+		
+	//Current Accuracy
+	UPROPERTY(VisibleAnywhere, Category = "Current Weapon Status")
+		float currentAccuracy;
+
+	//Current Recoil
+	UPROPERTY(VisibleAnywhere, Category = "Current Weapon Status")
+		float currentRecoil;
+
+	//Charge Points can be stacked for complete charge and do more damage
+	UPROPERTY(VisibleAnywhere, Category = "Current Weapon Status")
+		float chargePoints = chargeTime / maxCharge;
+
+	///STATIC VARIABLES
 	//Set Weapon Mechanic
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		EWeaponMechanic WeaponMechanic;
 
 	// Set base damage
@@ -53,7 +80,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int batteryConsume = 2;
 
-	
+	// Calculated Battery Consume per Magazine
+	UPROPERTY(VisibleAnywhere, Category = "Weapon Modify Panel")
+		int batteryCapacity = magazineCapacity * batteryConsume;
 
 	// Set Reload Time (second)
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
@@ -74,8 +103,6 @@ private:
 	// Set max range of fire (meter) when out of range bullet won't do damage
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int fireRange = 80;
-	
-	
 
 	///Projectile Bullet Mechanics Only ///
 	//Bullet flight speed (Only for Projectile Bullet Mechanics)
@@ -93,12 +120,7 @@ private:
 		int maxCharge = 10;
 
 	///Charge Mechanics Only ///
-
-	//Charge Points can be stacked for complete charge and do more damage
-	UPROPERTY(VisibleAnywhere, Category = "Weapon Debug")
-		float chargePoints = chargeTime / maxCharge;
-
-	// Calculated Battery Consume per Magazine
-	UPROPERTY(VisibleAnywhere, Category = "Weapon Debug")
-		int batteryCapacity = magazineCapacity * batteryConsume;
+	
+	/// METHOD
+	void setAutomatic();
 };
