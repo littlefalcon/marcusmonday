@@ -1,5 +1,5 @@
 # Doing List
-* Refactor Shooting System
+* Refactor Shooting System 
 # TODO List
 * Refactor Shooting System
 # Current Game Engine System
