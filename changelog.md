@@ -1,3 +1,5 @@
+### SNL4 27/11/17 0315
+* Now inherit class can communicate with parent class
 ### SNL3 27/11/17 2209
 * Add FireMechacnicAuto class
 	* Handle All Firing System

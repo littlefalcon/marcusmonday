@@ -8,8 +8,8 @@ AMasterWeapons::AMasterWeapons(){
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	//Create Inherit Class
 	FireMechanicAuto = CreateDefaultSubobject<UFireMechanicAuto>(FName("FireMechanicAuto"));
-	//FireMechanicAuto = this->GetOwner()->FindComponentByClass<UFireMechanicAuto>();
 }
 
 // Called when the game starts or when spawned
