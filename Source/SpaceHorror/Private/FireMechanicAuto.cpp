@@ -13,13 +13,16 @@ UFireMechanicAuto::UFireMechanicAuto()
 	//Get parent class
 	MasterWeapons = (AMasterWeapons*)this->GetOwner();
 
+	//Convert fireRate per minute to second
+	ConvertFireRate(fireRate);
+
 }
 
 void UFireMechanicAuto::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	UE_LOG(LogTemp, Warning, TEXT("damage = %f"), MasterWeapons->getBaseDamage());
+	//UE_LOG(LogTemp, Warning, TEXT("damage = %f"), MasterWeapons->getBaseDamage());
 }
 
 
@@ -27,8 +30,7 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if (IsHoldingThisWeapon) {
-		UE_LOG(LogTemp, Warning, TEXT("ready to fire"));
-		
+
 		if (canFire && IsPressFire) {
 			Fire();
 			canFire = false;
@@ -36,12 +38,11 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		
 		if (!canFire) {
 			firedTimeCount += DeltaTime;
-			if (firedTimeCount > fireRate) {
+			if (firedTimeCount > fireRate && !MasterWeapons->IsAmmoDepleted()) {
 				canFire = true;
 			}
 		}
 	}
-	
 }
 
 void UFireMechanicAuto::Fire() {
@@ -50,8 +51,12 @@ void UFireMechanicAuto::Fire() {
 	//Muzzle Particle
 	//Fire Animation
 	//Fire Sound
-	
+	MasterWeapons->DeceaseAmmo();
 
+}
+
+float ConvertFireRate(float firerate) {
+	return 60/firerate;
 }
 
 

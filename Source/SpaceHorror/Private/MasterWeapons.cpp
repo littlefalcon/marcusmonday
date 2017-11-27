@@ -26,15 +26,6 @@ void AMasterWeapons::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AMasterWeapons::onFire(){
-
-}
-
-void AMasterWeapons::setAutomatic() {
-	
-}
-
-
 //Check Weapon Mechanic of this Weapon Blueprint
 void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 	switch (WeaponMechanic)
@@ -59,14 +50,87 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 
 ///Get Method
 
+float AMasterWeapons::getFireRate()
+{
+	return 0.0f;
+}
+
 // return fireDamage
-float AMasterWeapons::getBaseDamage() {
+int AMasterWeapons::getBaseDamage() {
 	return fireDamage;
 }
 
+int AMasterWeapons::getMagazineCapacity()
+{
+	return magazineCapacity;
+}
+
+int AMasterWeapons::getBatteryConsume()
+{
+	return batteryConsume;
+}
+
+int AMasterWeapons::getBatteryCapacity()
+{
+	return batteryCapacity;
+}
+
+float AMasterWeapons::getReloadTime()
+{
+	return reloadTime;
+}
+
+float AMasterWeapons::getRecoil()
+{
+	return recoil;
+}
+
+float AMasterWeapons::getControl()
+{
+	return control;
+}
+
+int AMasterWeapons::getAccuracy()
+{
+	return accuracy;
+}
+
+int AMasterWeapons::getFireRange()
+{
+	return fireRange;
+}
+
+//get weapon mechanic
 EWeaponMechanic AMasterWeapons::getWeaponMechanic() {
 	return WeaponMechanic;
 }
 
+
 ///Set Method
+
+
+///Function
+//decease current ammo
+void AMasterWeapons::DeceaseAmmo() {
+	if (currentAmmo == 0) {
+		
+	}
+	else
+	{
+		currentAmmo--;
+	}
+}
+
+//is no ammo in magazine?
+bool AMasterWeapons::IsAmmoDepleted() {
+	if (currentAmmo == 0) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
 

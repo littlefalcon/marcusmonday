@@ -38,11 +38,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Modify Panel")
 		EWeaponMechanic WeaponMechanic;
 
-	//Set weapon fire
-	void onFire();
-
 	//Get base damage
-	float getBaseDamage();
+	
 
 	//Get Weapon Type
 	EWeaponMechanic getWeaponMechanic();
@@ -50,6 +47,30 @@ public:
 
 	UFireMechanicAuto* FireMechanicAuto = nullptr;
 
+	void DeceaseAmmo();
+
+	bool IsAmmoDepleted();
+
+	//GET METHOD
+	float getFireRate();
+
+	int getBaseDamage();
+	
+	int getMagazineCapacity();
+
+	int getBatteryConsume();
+
+	int getBatteryCapacity();
+	
+	float getReloadTime();
+	
+	float getRecoil();
+
+	float getControl();
+
+	int getAccuracy();
+
+	int getFireRange();
 
 private:
 
@@ -71,8 +92,6 @@ private:
 		float chargePoints = chargeTime / maxCharge;
 
 	///STATIC VARIABLES
-
-
 	// Set base damage
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int fireDamage = 50;
@@ -131,5 +150,4 @@ private:
 	///Charge Mechanics Only ///
 	
 	/// METHOD
-	void setAutomatic();
 };
