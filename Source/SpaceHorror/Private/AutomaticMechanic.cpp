@@ -8,6 +8,9 @@
 
 //
 void AAutomaticMechanic::OnAutomaticFire() {
-	
+	while (true)
+	{
+
+	}
 }
 

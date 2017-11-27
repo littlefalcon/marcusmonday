@@ -8,8 +8,6 @@ AMasterWeapons::AMasterWeapons()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	if (WeaponMechanic == EWeaponMechanic::AUTO) {
-	}
 }
 
 // Called when the game starts or when spawned
@@ -23,7 +21,7 @@ void AMasterWeapons::BeginPlay()
 void AMasterWeapons::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+		
 }
 
 void AMasterWeapons::onFire(){
@@ -31,7 +29,7 @@ void AMasterWeapons::onFire(){
 }
 
 void AMasterWeapons::setAutomatic() {
-	
+	AutomaticMechanic->OnAutomaticFire();
 }
 
 //swtich weapon trigger
@@ -56,6 +54,10 @@ void AMasterWeapons::switchWeapon(FString weaponSlot) {
 // return fireDamage
 float AMasterWeapons::getBaseDamage() {
 	return fireDamage;
+}
+
+EWeaponMechanic AMasterWeapons::getWeaponMechanic() {
+	return WeaponMechanic;
 }
 
 ///Set Method
