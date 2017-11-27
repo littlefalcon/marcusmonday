@@ -8,9 +8,6 @@
 
 //
 void AAutomaticMechanic::OnAutomaticFire() {
-	while (true)
-	{
-
-	}
+	UE_LOG(LogTemp, Warning, TEXT("Your message"));
 }
 

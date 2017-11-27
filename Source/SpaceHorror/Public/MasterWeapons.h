@@ -4,10 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "AutomaticMechanic.h"
 #include "MasterWeapons.generated.h"
 
-
+class AAutomaticMechanic;
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class EWeaponMechanic : uint8
 {
@@ -45,9 +44,9 @@ public:
 	//Get Weapon Type
 	EWeaponMechanic getWeaponMechanic();
 
-private:
+	AAutomaticMechanic* AutoMech;
 
-	AAutomaticMechanic* AutomaticMechanic;
+private:
 
 	///DYNAMIC VARIABLES
 	//Current Ammo
