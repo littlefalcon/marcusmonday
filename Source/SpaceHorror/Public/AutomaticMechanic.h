@@ -15,5 +15,9 @@ class AAutomaticMechanic : public AMasterWeapons
 	GENERATED_BODY()
 	
 public:
+	AAutomaticMechanic();
+
+	virtual void Tick(float DeltaTime) override;
+
 	void OnAutomaticFire();
 };

@@ -1,7 +1,8 @@
 # Doing List
-* Refactor Shooting System 
+* Refactor Shooting System (Automatic Shoot System)
 # TODO List
 * Refactor Shooting System
+* Delete old class
 # Current Game Engine System
 1. Shoot System
 * Shoot Mechanics

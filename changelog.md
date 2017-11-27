@@ -1,3 +1,7 @@
+### SNL3 27/11/17 2209
+* Add FireMechacnicAuto class
+	* Handle All Firing System
+* Complete Test Commication between 2 class use DefaultSubObject and find class in BP with FNAME
 ### SNL2 26/11/17 1815
 * Add Subclass (WeaponMechanic)
 * Add Method in MasterWepon

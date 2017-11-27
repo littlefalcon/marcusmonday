@@ -6,7 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "MasterWeapons.generated.h"
 
-class AAutomaticMechanic;
+class UFireMechanicAuto;
+
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class EWeaponMechanic : uint8
 {
@@ -33,8 +34,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void switchWeapon(FString weaponSlot);
-	
+	//Set Weapon Mechanic
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Modify Panel")
+		EWeaponMechanic WeaponMechanic;
+
 	//Set weapon fire
 	void onFire();
 
@@ -43,8 +46,10 @@ public:
 
 	//Get Weapon Type
 	EWeaponMechanic getWeaponMechanic();
+	void updateWeaponMechanic(EWeaponMechanic WeaponMechanic);
 
-	AAutomaticMechanic* AutoMech;
+	UFireMechanicAuto* FireMechanicAuto = nullptr;
+
 
 private:
 
@@ -66,9 +71,7 @@ private:
 		float chargePoints = chargeTime / maxCharge;
 
 	///STATIC VARIABLES
-	//Set Weapon Mechanic
-	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
-		EWeaponMechanic WeaponMechanic;
+
 
 	// Set base damage
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
@@ -82,7 +85,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int magazineCapacity = 10;
 
-	// Set Battery Consome per one time fire (
+	// Set Battery Consome per fire
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int batteryConsume = 2;
 
