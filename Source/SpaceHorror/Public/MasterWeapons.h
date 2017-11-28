@@ -40,18 +40,19 @@ public:
 
 	//Get base damage
 	
-
 	//Get Weapon Type
 	EWeaponMechanic getWeaponMechanic();
 	void updateWeaponMechanic(EWeaponMechanic WeaponMechanic);
 
 	UFireMechanicAuto* FireMechanicAuto = nullptr;
 
-	void DeceaseAmmo();
+	void DecreaseAmmo(int amount);
 
 	bool IsAmmoDepleted();
 
 	//GET METHOD
+	int getCurrentAmmo();
+
 	float getFireRate();
 
 	int getBaseDamage();
@@ -72,6 +73,9 @@ public:
 
 	int getFireRange();
 
+	int getCurrentBattery();
+	//SET METHOD 
+	void setCurrentBattery(int newcurrentbattery);
 private:
 
 	///DYNAMIC VARIABLES
@@ -108,9 +112,15 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int batteryConsume = 2;
 
+	//TODO move to right place
+	//current amount of battery carrying in inventory
+	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
+		int currentBattery = 9999;
+
 	// Calculated Battery Consume per Magazine
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Modify Panel")
 		int batteryCapacity = magazineCapacity * batteryConsume;
+
 
 	// Set Reload Time (second)
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")

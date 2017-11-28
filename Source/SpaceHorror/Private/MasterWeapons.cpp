@@ -50,9 +50,14 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 
 ///Get Method
 
+int AMasterWeapons::getCurrentAmmo()
+{
+	return currentAmmo;
+}
+
 float AMasterWeapons::getFireRate()
 {
-	return 0.0f;
+	return fireRate;
 }
 
 // return fireDamage
@@ -100,6 +105,16 @@ int AMasterWeapons::getFireRange()
 	return fireRange;
 }
 
+int AMasterWeapons::getCurrentBattery()
+{
+	return currentBattery;
+}
+
+void AMasterWeapons::setCurrentBattery(int newcurrentbattery)
+{
+	currentBattery = newcurrentbattery;
+}
+
 //get weapon mechanic
 EWeaponMechanic AMasterWeapons::getWeaponMechanic() {
 	return WeaponMechanic;
@@ -111,13 +126,13 @@ EWeaponMechanic AMasterWeapons::getWeaponMechanic() {
 
 ///Function
 //decease current ammo
-void AMasterWeapons::DeceaseAmmo() {
+void AMasterWeapons::DecreaseAmmo(int amount) {
 	if (currentAmmo == 0) {
 		
 	}
 	else
 	{
-		currentAmmo--;
+		currentAmmo -= amount;
 	}
 }
 

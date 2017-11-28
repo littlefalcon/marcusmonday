@@ -81,6 +81,7 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 
 	// Uncomment the following line to turn motion controllers on by default:
 	//bUsingMotionControllers = true;
+
 }
 
 void ASpaceHorrorCharacter::BeginPlay()
@@ -271,13 +272,13 @@ void ASpaceHorrorCharacter::Tick(float DeltaTime)
 void ASpaceHorrorCharacter::OnFire()
 {
 	UE_LOG(LogTemp, Warning, TEXT("OpenFire"));
-	IsFiring = true;
+	//IsFiring = true;
 	
 }
 
 
 void ASpaceHorrorCharacter::StopFire() {
-	IsFiring = false;
+	//IsFiring = false;
 }
 
 void ASpaceHorrorCharacter::Weapon1()

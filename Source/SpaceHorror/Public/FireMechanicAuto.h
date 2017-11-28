@@ -7,8 +7,9 @@
 #include "FireMechanicAuto.generated.h"
 
 
-class AMasterWeapons;
 
+class AMasterWeapons;
+class ASpaceHorrorCharacter;
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SPACEHORROR_API UFireMechanicAuto : public UActorComponent
 {
@@ -25,6 +26,8 @@ protected:
 public:	
 
 	AMasterWeapons* MasterWeapons = nullptr;
+
+	ASpaceHorrorCharacter* SpaceHorrorCharacter = nullptr;
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -41,6 +44,16 @@ public:
 	float fireRate;
 
 	float firedTimeCount = 0;
+
+	float ConvertFireRate(float firerate);
+
+private:
+	void PerformReload();
+
+	void FinishReload();
 	
-		
+	//activate reload sequence
+	bool IsReloading;
+	float reloadTime;
+	
 };
