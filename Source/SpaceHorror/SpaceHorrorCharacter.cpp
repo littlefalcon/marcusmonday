@@ -151,6 +151,9 @@ void ASpaceHorrorCharacter::Tick(float DeltaTime)
 	
 	MuzzleLocation = FP_MuzzleLocation->GetComponentLocation();
 
+
+	
+
 	if (WeaponSelecter == 1) {
 		if (canFire == false) {
 			CooldownTime += DeltaTime;

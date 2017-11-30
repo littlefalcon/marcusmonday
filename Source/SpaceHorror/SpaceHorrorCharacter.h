@@ -82,10 +82,7 @@ public:
 
 protected:
 	
-	/** Fires a projectile. */
-	void OnFire();
-	/*add by hex*/
-	void StopFire();
+	
 
 	/** Resets HMD orientation and position in VR. */
 	void OnResetVR();
@@ -145,6 +142,13 @@ public:
 		int WeaponSelecter = 0;
 	UPROPERTY(BlueprintReadOnly)
 		FVector MuzzleLocation;
+
+	/** Fires a projectile. */
+	void OnFire();
+	/*add by hex*/
+	void StopFire();
+
+	int testvar = 1;
 
 private:
 	bool IsFiring = false;

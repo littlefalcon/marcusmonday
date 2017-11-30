@@ -16,25 +16,23 @@ UFireMechanicAuto::UFireMechanicAuto()
 	MasterWeapons = (AMasterWeapons*)this->GetOwner();
 
 	//Get Player Character
-	//SpaceHorrorCharacter = GetWorld()->GetFirstPlayerController()->GetComponentByClass(A//GetWorld()->GetFirstPlayerController()->GetCharacter();
-	//SpaceHorrorCharacter = (ASpaceHorrorCharacter*)this->GetWorld()->GetFirstPlayerController()->GetCharacter();
+	//TODO LEARN CAST
+	//SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 	
-
 }
 
 void UFireMechanicAuto::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	//UE_LOG(LogTemp, Warning, TEXT("damage = %f"), MasterWeapons->getBaseDamage());
+	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 
-	//Get fireRate
-	fireRate = MasterWeapons->getFireRate();
-	//Convert fireRate per minute to second
-	fireRate = ConvertFireRate(fireRate);
+	float test = SpaceHorrorCharacter->testvar;
+	test = 3;
+	UE_LOG(LogTemp, Warning, TEXT("(3) send from fire mechanic auto (%f)"), test);
 
-	//Get Reload Time
-	reloadTime = MasterWeapons->getReloadTime();
+	GetWeaponAttributes();
+	
 }
 
 
@@ -102,6 +100,16 @@ void UFireMechanicAuto::FinishReload() {
 	MasterWeapons->setCurrentBattery(deceaseBattery);
 	// exit IsReloading loop
 	IsReloading = false;
+}
+
+
+void UFireMechanicAuto::GetWeaponAttributes() {
+	//Get fireRate
+	fireRate = MasterWeapons->getFireRate();
+	//Convert fireRate per minute to second
+	fireRate = ConvertFireRate(fireRate);
+	//Get Reload Time
+	reloadTime = MasterWeapons->getReloadTime();
 }
 
 

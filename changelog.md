@@ -1,3 +1,8 @@
+### SNL5 30/11/17 1354
+* BP_Beam and BP_FPC detach print sring
+* can get acess variable from begin play not in constructor
+* SpaceHorrorCharacter OnFire() StopFire() Method to Public
+
 ### SNL4 28/11/17 0315
 * Now inherit class can communicate with parent class
 ### SNL3 27/11/17 2209

@@ -48,12 +48,16 @@ public:
 	float ConvertFireRate(float firerate);
 
 private:
+
+	void GetWeaponAttributes();
+
 	void PerformReload();
 
 	void FinishReload();
-	
+
 	//activate reload sequence
 	bool IsReloading;
+
 	float reloadTime;
 	
 };
