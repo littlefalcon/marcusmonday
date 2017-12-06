@@ -1,3 +1,6 @@
+### SNL8 6/12/17 1341
+* Implement Reload Mechanic
+* currentammo sync to magazinecapacity when begin play
 ### SNL7 6/12/17 1256
 * Refactor FireAutomatic / MasterWeapon Class
 ### SNL6 6/12/17 1042

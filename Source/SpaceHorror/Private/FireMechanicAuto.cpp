@@ -54,7 +54,8 @@ void UFireMechanicAuto::AutomaticMechanic(float DeltaTime) {
 }
 
 void UFireMechanicAuto::ReloadMechanic(float DeltaTime) {
-	if (IsReloading) {
+	if (SpaceHorrorCharacter->IsReload) {
+		PerformReload();
 		reloadTime -= DeltaTime;
 		UE_LOG(LogTemp, Warning, TEXT("Reloading %f"), reloadTime);
 		if (reloadTime <= 0) {
@@ -76,11 +77,13 @@ void UFireMechanicAuto::Fire() {
 }
 
 
-
 void UFireMechanicAuto::PerformReload() {
-	if (currentAmmo == magazineCapacity){return;}
-	IsReloading = true;
-	//Wait Reload Animation Complete
+	if (currentAmmo == magazineCapacity){
+		SpaceHorrorCharacter->setReload(false);
+		UE_LOG(LogTemp, Warning, TEXT("Not Need to Reload"));
+		return;
+	}
+	UE_LOG(LogTemp, Warning, TEXT("PerformReload"));
 }
 
 
@@ -96,7 +99,8 @@ void UFireMechanicAuto::FinishReload() {
 	// set new ammo in magazine
 	//----
 	// exit IsReloading loop
-	IsReloading = false;
+	SpaceHorrorCharacter->setReload(false);
+	UE_LOG(LogTemp, Warning, TEXT("FinishReload"));
 }
 
 void UFireMechanicAuto::GetPlayerInputInformation() {
@@ -104,6 +108,8 @@ void UFireMechanicAuto::GetPlayerInputInformation() {
 	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 	//Get FireButton Input
 	IsFire = SpaceHorrorCharacter->IsFire;
+	//Get Reload Input
+	//IsReloading = SpaceHorrorCharacter->IsReload;
 }
 
 void UFireMechanicAuto::GetWeaponAttributes() {

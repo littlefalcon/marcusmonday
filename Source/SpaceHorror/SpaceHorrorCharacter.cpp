@@ -131,6 +131,9 @@ void ASpaceHorrorCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAction("Weapon 5", IE_Pressed, this, &ASpaceHorrorCharacter::Weapon5);
 	PlayerInputComponent->BindAction("Weapon 6", IE_Pressed, this, &ASpaceHorrorCharacter::Weapon6);
 
+	//Reload Action
+	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ASpaceHorrorCharacter::Reload);
+
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ASpaceHorrorCharacter::OnResetVR);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ASpaceHorrorCharacter::MoveForward);
@@ -267,6 +270,14 @@ void ASpaceHorrorCharacter::Tick(float DeltaTime)
 			}
 		}
 	}
+}
+
+void ASpaceHorrorCharacter::Reload() {
+	IsReload = true;
+}
+
+void ASpaceHorrorCharacter::setReload(bool setbool) {
+	IsReload = setbool;
 }
 
 void ASpaceHorrorCharacter::InputFireDown()

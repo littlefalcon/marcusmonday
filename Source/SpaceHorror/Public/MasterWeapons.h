@@ -45,7 +45,7 @@ public:
 	// TODO should delete?
 	UFireMechanicAuto* FireMechanicAuto = nullptr;
 
-	// decease ammo when finish reload
+	// decease ammo function
 	void DecreaseAmmo(int amount);
 
 	// check is no ammo in magazine
@@ -78,9 +78,9 @@ public:
 	
 	//SET METHOD 
 	
-	//TODO move to inventory class
+	
 	// set new current battery in inventory
-	void setCurrentBattery(int newcurrentbattery);
+	void setCurrentBattery(int newcurrentbattery);//TODO move to inventory class
 
 	// set new current ammo when reload complete
 	void setCurrentAmmo(int newcurrentammo);
@@ -90,7 +90,7 @@ private:
 	///DYNAMIC VARIABLES
 	//Current Ammo
 	UPROPERTY(EditAnywhere, Category = "Current Weapon Status")
-		int currentAmmo;
+		int currentAmmo; //TODO make to Dynamic with upgrade class
 		
 	//Current Accuracy
 	UPROPERTY(VisibleAnywhere, Category = "Current Weapon Status")

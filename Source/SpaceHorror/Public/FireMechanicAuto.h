@@ -75,7 +75,7 @@ private:
 	void FinishReload();
 
 	//activate reload sequence
-	bool IsReloading;
+	//bool IsReloading;
 
 	//Player Input Variables
 	bool IsFire;

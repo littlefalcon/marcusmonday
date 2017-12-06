@@ -86,6 +86,10 @@ public:
 
 	bool IsFire = false;
 
+	bool IsReload = false;
+	void setReload(bool setbool);
+	void Reload();
+
 protected:
 	
 	

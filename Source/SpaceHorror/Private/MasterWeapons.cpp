@@ -10,6 +10,8 @@ AMasterWeapons::AMasterWeapons(){
 
 	//Create Inherit Class TODO Create Inherit Class to same with Weapontype
 	FireMechanicAuto = CreateDefaultSubobject<UFireMechanicAuto>(FName("FireMechanicAuto"));
+
+	 
 }
 
 // Called when the game starts or when spawned
@@ -18,6 +20,8 @@ void AMasterWeapons::BeginPlay()
 	Super::BeginPlay();
 	//Check what weapon mechanic in this instance
 	updateWeaponMechanic(WeaponMechanic);
+	
+	currentAmmo = magazineCapacity; //TODO sync to upgrade class
 }
 
 // Called every frame
