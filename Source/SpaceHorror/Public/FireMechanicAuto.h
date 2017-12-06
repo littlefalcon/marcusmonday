@@ -35,19 +35,20 @@ public:
 
 	void Fire();
 
-	bool canFire;
+	bool canFire = true;
 
 	bool IsHoldingTrigger;
 
 	bool IsPressFire;
 
-	float fireRate;
-
 	float firedTimeCount = 0;
+
+
+private:
 
 	float ConvertFireRate(float firerate);
 
-private:
+	void GetPlayerInputInformation();
 
 	void GetWeaponAttributes();
 
@@ -58,6 +59,36 @@ private:
 	//activate reload sequence
 	bool IsReloading;
 
+	//Player Input Variables
+	bool IsFire;
+
+	// Weapon Attributes
+	int currentAmmo;
+
+	float fireRate;
+
+	int baseDamage;
+
+	int magazineCapacity;
+
+	int batteryConsume;
+
+	int batteryCapacity;
+
 	float reloadTime;
-	
+
+	float recoil;
+
+	float control;
+
+	int accuracy;
+
+	int fireRange;
+
+	int currentBattery;
+
+	//DEV TEMP
+	//var checking for log 1 time if same number
+	int logCurrentAmmo;
+
 };

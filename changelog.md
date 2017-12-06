@@ -1,3 +1,7 @@
+### SNL6 6/12/17 1042
+* fireMechanicauto now sync with firebutton
+	* ammo decease when fire
+	* firerate can control fire
 ### SNL5 30/11/17 1354
 * BP_Beam and BP_FPC detach print sring
 * can get acess variable from begin play not in constructor

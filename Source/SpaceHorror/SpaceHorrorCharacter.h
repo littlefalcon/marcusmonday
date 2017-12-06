@@ -80,6 +80,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	uint32 bUsingMotionControllers : 1;
 
+	void InputFireDown();
+
+	void InputFireRelease();
+
+	bool IsFire = false;
+
 protected:
 	
 	
@@ -144,9 +150,9 @@ public:
 		FVector MuzzleLocation;
 
 	/** Fires a projectile. */
-	void OnFire();
+	//void OnFire();
 	/*add by hex*/
-	void StopFire();
+	//void StopFire();
 
 	int testvar = 1;
 

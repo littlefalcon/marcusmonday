@@ -27,55 +27,57 @@ void UFireMechanicAuto::BeginPlay()
 	
 	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 
-	float test = SpaceHorrorCharacter->testvar;
-	test = 3;
-	UE_LOG(LogTemp, Warning, TEXT("(3) send from fire mechanic auto (%f)"), test);
-
 	GetWeaponAttributes();
-	
+	fireRate = ConvertFireRate(fireRate);
 }
 
 
 void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (IsHoldingThisWeapon) {
-		
-		//Fire Mechanic
-		if (canFire && IsPressFire) {
-			Fire();
-			canFire = false;
-		}
-		
-		if (!canFire) {
-			firedTimeCount += DeltaTime;
-			if (firedTimeCount > fireRate && !MasterWeapons->IsAmmoDepleted()) {
-				canFire = true;
-			}
-		}
+	//Get Control Class Everyframe
+	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	GetWeaponAttributes();
+	//Wait for player input every frame
+	GetPlayerInputInformation();
 
-		//Reload
-		if (IsReloading) {
-			reloadTime -= DeltaTime;
-			UE_LOG(LogTemp, Warning, TEXT("Reloading %f"),reloadTime);
-			if (reloadTime <= 0) {
-				FinishReload();
-				reloadTime = MasterWeapons->getReloadTime();
-
-			}
+	//Fire Mechanic
+	if (canFire && IsFire) {
+		Fire();
+		canFire = false;
+	}
+		
+	if (!canFire) {
+		firedTimeCount += DeltaTime;
+		if (firedTimeCount > fireRate && !MasterWeapons->IsAmmoDepleted()) {
+			canFire = true;
+			firedTimeCount = 0;
 		}
 	}
 
+	//Reload
+	if (IsReloading) {
+		reloadTime -= DeltaTime;
+		UE_LOG(LogTemp, Warning, TEXT("Reloading %f"),reloadTime);
+		if (reloadTime <= 0) {
+			FinishReload();
+			reloadTime = MasterWeapons->getReloadTime();
+		}
+	}
+
+	
 }
 
 void UFireMechanicAuto::Fire() {
-	UE_LOG(LogTemp, Warning, TEXT("firing"));
 	IsPressFire = true;
 	//Spawn Bullet
 	//Muzzle Particle
 	//Fire Animation
 	//Fire Sound
 	MasterWeapons->DecreaseAmmo(1);
+	currentAmmo = MasterWeapons->getCurrentAmmo();
+	UE_LOG(LogTemp, Warning, TEXT("currentAmmo = %d"),currentAmmo);
+	//DEV LOG
 }
 
 float UFireMechanicAuto::ConvertFireRate(float firerate) {
@@ -83,19 +85,24 @@ float UFireMechanicAuto::ConvertFireRate(float firerate) {
 }
 
 void UFireMechanicAuto::PerformReload() {
-	if (MasterWeapons->getCurrentAmmo() == MasterWeapons->getMagazineCapacity()){return;}
+	if (currentAmmo == magazineCapacity){return;}
 	IsReloading = true;
 	//Wait Reload Animation Complete
 
 }
 
+void UFireMechanicAuto::GetPlayerInputInformation() {
+	
+	IsFire = SpaceHorrorCharacter->IsFire;
+}
+
 void UFireMechanicAuto::FinishReload() {
 	//find how much bullet need to regain
-	int ammoCost = MasterWeapons->getMagazineCapacity() - MasterWeapons->getCurrentAmmo();
+	int ammoCost = magazineCapacity - currentAmmo;
 	// multiplier with batteryconsume
-	ammoCost = ammoCost * MasterWeapons->getBatteryConsume();
+	ammoCost = ammoCost * batteryConsume;
 	// decease battery from inventory
-	int deceaseBattery = MasterWeapons->getCurrentBattery() - ammoCost;
+	int deceaseBattery = currentBattery - ammoCost;
 	// set new current battery to inventory
 	MasterWeapons->setCurrentBattery(deceaseBattery);
 	// exit IsReloading loop
@@ -103,13 +110,34 @@ void UFireMechanicAuto::FinishReload() {
 }
 
 
+// Get Weapon Attributes from MasterWeapon Class (Static Variable)
 void UFireMechanicAuto::GetWeaponAttributes() {
-	//Get fireRate
+	
+	currentAmmo = MasterWeapons->getCurrentAmmo();
+
 	fireRate = MasterWeapons->getFireRate();
-	//Convert fireRate per minute to second
 	fireRate = ConvertFireRate(fireRate);
-	//Get Reload Time
+
+	baseDamage = MasterWeapons->getBaseDamage();
+
+	magazineCapacity = MasterWeapons->getMagazineCapacity();
+
+	batteryConsume = MasterWeapons->getBatteryConsume();
+
+	batteryCapacity = MasterWeapons->getBatteryCapacity();
+
 	reloadTime = MasterWeapons->getReloadTime();
+
+	recoil = MasterWeapons->getRecoil();
+
+	control = MasterWeapons->getControl();
+
+	accuracy = MasterWeapons->getAccuracy();
+
+	fireRange = MasterWeapons->getFireRange();
+
+	currentBattery = MasterWeapons->getCurrentBattery();
+
 }
 
 

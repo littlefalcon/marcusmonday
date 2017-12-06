@@ -119,8 +119,8 @@ void ASpaceHorrorCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	//InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ASpaceHorrorCharacter::TouchStarted);
 	if (EnableTouchscreenMovement(PlayerInputComponent) == false)
 	{
-		PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ASpaceHorrorCharacter::OnFire);
-		PlayerInputComponent->BindAction("Fire", IE_Released, this, &ASpaceHorrorCharacter::StopFire);
+		PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ASpaceHorrorCharacter::InputFireDown);
+		PlayerInputComponent->BindAction("Fire", IE_Released, this, &ASpaceHorrorCharacter::InputFireRelease);
 	}
 
 	//Weapon Selecter TODO MAKE TO ENUM
@@ -150,9 +150,6 @@ void ASpaceHorrorCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	MuzzleLocation = FP_MuzzleLocation->GetComponentLocation();
-
-
-	
 
 	if (WeaponSelecter == 1) {
 		if (canFire == false) {
@@ -272,16 +269,15 @@ void ASpaceHorrorCharacter::Tick(float DeltaTime)
 	}
 }
 
-void ASpaceHorrorCharacter::OnFire()
+void ASpaceHorrorCharacter::InputFireDown()
 {
-	UE_LOG(LogTemp, Warning, TEXT("OpenFire"));
-	//IsFiring = true;
+	IsFire = true;
 	
 }
 
-
-void ASpaceHorrorCharacter::StopFire() {
-	//IsFiring = false;
+void ASpaceHorrorCharacter::InputFireRelease() {
+	UE_LOG(LogTemp, Warning, TEXT("Relase Fire"));
+	IsFire = false;
 }
 
 void ASpaceHorrorCharacter::Weapon1()
@@ -371,7 +367,7 @@ void ASpaceHorrorCharacter::EndTouch(const ETouchIndex::Type FingerIndex, const 
 	}
 	if ((FingerIndex == TouchItem.FingerIndex) && (TouchItem.bMoved == false))
 	{
-		OnFire();
+		//OnFire();
 	}
 	TouchItem.bIsPressed = false;
 }
