@@ -1,4 +1,4 @@
-### SNL10 6/12/17 1408
+### SNL10 6/12/17 1614
 * block fire when reloading
 * attach gun to player 
 
