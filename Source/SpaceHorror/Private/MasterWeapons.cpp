@@ -11,6 +11,7 @@ AMasterWeapons::AMasterWeapons(){
 	//Create Inherit Class TODO Create Inherit Class to same with Weapontype
 	FireMechanicAuto = CreateDefaultSubobject<UFireMechanicAuto>(FName("FireMechanicAuto"));
 
+
 	 
 }
 
@@ -18,6 +19,10 @@ AMasterWeapons::AMasterWeapons(){
 void AMasterWeapons::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	//Attach to BP_FirstPersonCharacter
+	//attach
+
 	//Check what weapon mechanic in this instance
 	updateWeaponMechanic(WeaponMechanic);
 	

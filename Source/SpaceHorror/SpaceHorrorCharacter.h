@@ -44,6 +44,8 @@ class ASpaceHorrorCharacter : public ACharacter
 	/** Motion controller (left hand) */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UMotionControllerComponent* L_MotionController;
+	
+
 
 public:
 	ASpaceHorrorCharacter();
@@ -87,7 +89,9 @@ public:
 	bool IsFire = false;
 
 	bool IsReload = false;
+
 	void setReload(bool setbool);
+
 	void Reload();
 
 protected:

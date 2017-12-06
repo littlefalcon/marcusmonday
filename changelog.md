@@ -1,3 +1,7 @@
+### SNL10 6/12/17 1408
+* block fire when reloading
+* attach gun to player 
+
 ### SNL9 6/12/17 1408
 * add reload log
 * fix method name

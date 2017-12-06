@@ -11,6 +11,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "MotionControllerComponent.h"
 
+#include "MasterWeapons.h"
+
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
 //////////////////////////////////////////////////////////////////////////
@@ -82,6 +84,9 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 	// Uncomment the following line to turn motion controllers on by default:
 	//bUsingMotionControllers = true;
 
+	//DEV createasset and attachto capsule component
+	
+	
 }
 
 void ASpaceHorrorCharacter::BeginPlay()
@@ -146,6 +151,7 @@ void ASpaceHorrorCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAxis("TurnRate", this, &ASpaceHorrorCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &ASpaceHorrorCharacter::LookUpAtRate);
+
 }
 
 void ASpaceHorrorCharacter::Tick(float DeltaTime)

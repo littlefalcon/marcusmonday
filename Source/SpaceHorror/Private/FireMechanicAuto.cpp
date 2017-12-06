@@ -40,6 +40,7 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 void UFireMechanicAuto::AutomaticMechanic(float DeltaTime) {
 	
 	if (canFire && IsFire) {
+		if (SpaceHorrorCharacter->IsReload) { return; };
 		Fire();
 		canFire = false;
 	}
@@ -82,7 +83,6 @@ void UFireMechanicAuto::PerformReload() {
 		UE_LOG(LogTemp, Warning, TEXT("Magazine is full no need to reload"));
 		return;
 	}
-	UE_LOG(LogTemp, Warning, TEXT("PerformReload"));
 }
 
 
