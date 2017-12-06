@@ -1,3 +1,5 @@
+### SNL7 6/12/17 1256
+* Refactor FireAutomatic / MasterWeapon Class
 ### SNL6 6/12/17 1042
 * fireMechanicauto now sync with firebutton
 	* ammo decease when fire

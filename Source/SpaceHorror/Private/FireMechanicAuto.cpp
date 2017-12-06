@@ -4,49 +4,46 @@
 #include "MasterWeapons.h"
 #include "SpaceHorrorCharacter.h"
 
-
-// Sets default values for this component's properties
 UFireMechanicAuto::UFireMechanicAuto()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
+
 	PrimaryComponentTick.bCanEverTick = true;
 
 	//Get Parent Class
 	MasterWeapons = (AMasterWeapons*)this->GetOwner();
 
-	//Get Player Character
-	//TODO LEARN CAST
-	//SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
-	
 }
 
 void UFireMechanicAuto::BeginPlay()
 {
 	Super::BeginPlay();
-	
 	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
-
 	GetWeaponAttributes();
-	fireRate = ConvertFireRate(fireRate);
 }
 
 
 void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	//Get Control Class Everyframe
-	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
-	GetWeaponAttributes();
+
+	//Update current ammo
+	GetDynamicWeaponAttributes();
 	//Wait for player input every frame
 	GetPlayerInputInformation();
+	//Handle Firing
+	AutomaticMechanic(DeltaTime);
+	//Handle Reload
+	ReloadMechanic(DeltaTime);
+	
+}
 
-	//Fire Mechanic
+void UFireMechanicAuto::AutomaticMechanic(float DeltaTime) {
+	
 	if (canFire && IsFire) {
 		Fire();
 		canFire = false;
 	}
-		
+
 	if (!canFire) {
 		firedTimeCount += DeltaTime;
 		if (firedTimeCount > fireRate && !MasterWeapons->IsAmmoDepleted()) {
@@ -54,18 +51,17 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 			firedTimeCount = 0;
 		}
 	}
+}
 
-	//Reload
+void UFireMechanicAuto::ReloadMechanic(float DeltaTime) {
 	if (IsReloading) {
 		reloadTime -= DeltaTime;
-		UE_LOG(LogTemp, Warning, TEXT("Reloading %f"),reloadTime);
+		UE_LOG(LogTemp, Warning, TEXT("Reloading %f"), reloadTime);
 		if (reloadTime <= 0) {
 			FinishReload();
 			reloadTime = MasterWeapons->getReloadTime();
 		}
 	}
-
-	
 }
 
 void UFireMechanicAuto::Fire() {
@@ -77,24 +73,16 @@ void UFireMechanicAuto::Fire() {
 	MasterWeapons->DecreaseAmmo(1);
 	currentAmmo = MasterWeapons->getCurrentAmmo();
 	UE_LOG(LogTemp, Warning, TEXT("currentAmmo = %d"),currentAmmo);
-	//DEV LOG
 }
 
-float UFireMechanicAuto::ConvertFireRate(float firerate) {
-	return 60/firerate;
-}
+
 
 void UFireMechanicAuto::PerformReload() {
 	if (currentAmmo == magazineCapacity){return;}
 	IsReloading = true;
 	//Wait Reload Animation Complete
-
 }
 
-void UFireMechanicAuto::GetPlayerInputInformation() {
-	
-	IsFire = SpaceHorrorCharacter->IsFire;
-}
 
 void UFireMechanicAuto::FinishReload() {
 	//find how much bullet need to regain
@@ -105,12 +93,19 @@ void UFireMechanicAuto::FinishReload() {
 	int deceaseBattery = currentBattery - ammoCost;
 	// set new current battery to inventory
 	MasterWeapons->setCurrentBattery(deceaseBattery);
+	// set new ammo in magazine
+	//----
 	// exit IsReloading loop
 	IsReloading = false;
 }
 
+void UFireMechanicAuto::GetPlayerInputInformation() {
+	//Get Control Class Everyframe
+	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	//Get FireButton Input
+	IsFire = SpaceHorrorCharacter->IsFire;
+}
 
-// Get Weapon Attributes from MasterWeapon Class (Static Variable)
 void UFireMechanicAuto::GetWeaponAttributes() {
 	
 	currentAmmo = MasterWeapons->getCurrentAmmo();
@@ -140,5 +135,15 @@ void UFireMechanicAuto::GetWeaponAttributes() {
 
 }
 
+void UFireMechanicAuto::GetDynamicWeaponAttributes() {
+
+	currentAmmo = MasterWeapons->getCurrentAmmo();
+
+	currentBattery = MasterWeapons->getCurrentBattery();
+
+}
 
 
+float UFireMechanicAuto::ConvertFireRate(float firerate) {
+	return 60 / firerate;
+}

@@ -8,7 +8,7 @@ AMasterWeapons::AMasterWeapons(){
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	//Create Inherit Class
+	//Create Inherit Class TODO Create Inherit Class to same with Weapontype
 	FireMechanicAuto = CreateDefaultSubobject<UFireMechanicAuto>(FName("FireMechanicAuto"));
 }
 
@@ -48,8 +48,39 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 	}
 }
 
-///Get Method
+///FUNCTION
+void AMasterWeapons::DecreaseAmmo(int amount) {
+	if (currentAmmo == 0) {
+		return;
+	}
+	else
+	{
+		currentAmmo -= amount;
+	}
+}
 
+bool AMasterWeapons::IsAmmoDepleted() {
+	if (currentAmmo == 0) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+///Set Method 
+
+void AMasterWeapons::setCurrentBattery(int newcurrentbattery)
+{
+	currentBattery = newcurrentbattery;
+}
+
+void AMasterWeapons::setCurrentAmmo(int newcurrentammo)
+{
+	currentAmmo = newcurrentammo;
+}
+///Get Method
 int AMasterWeapons::getCurrentAmmo()
 {
 	return currentAmmo;
@@ -60,7 +91,6 @@ float AMasterWeapons::getFireRate()
 	return fireRate;
 }
 
-// return fireDamage
 int AMasterWeapons::getBaseDamage() {
 	return fireDamage;
 }
@@ -110,42 +140,11 @@ int AMasterWeapons::getCurrentBattery()
 	return currentBattery;
 }
 
-void AMasterWeapons::setCurrentBattery(int newcurrentbattery)
-{
-	currentBattery = newcurrentbattery;
-}
-
-//get weapon mechanic
 EWeaponMechanic AMasterWeapons::getWeaponMechanic() {
 	return WeaponMechanic;
 }
 
 
-///Set Method
-
-
-///Function
-//decease current ammo
-void AMasterWeapons::DecreaseAmmo(int amount) {
-	if (currentAmmo == 0) {
-		
-	}
-	else
-	{
-		currentAmmo -= amount;
-	}
-}
-
-//is no ammo in magazine?
-bool AMasterWeapons::IsAmmoDepleted() {
-	if (currentAmmo == 0) {
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
 
 
 

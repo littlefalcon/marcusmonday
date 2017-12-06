@@ -25,9 +25,7 @@ protected:
 
 public:	
 
-	AMasterWeapons* MasterWeapons = nullptr;
-
-	ASpaceHorrorCharacter* SpaceHorrorCharacter = nullptr;
+	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -46,14 +44,34 @@ public:
 
 private:
 
+	//Weapon Information
+	AMasterWeapons* MasterWeapons = nullptr;
+
+	//Input Information
+	ASpaceHorrorCharacter* SpaceHorrorCharacter = nullptr;
+	
+	//Method convert firerate
 	float ConvertFireRate(float firerate);
 
+	//Get Input
 	void GetPlayerInputInformation();
 
+	//Get Weapon Information
 	void GetWeaponAttributes();
 
+	//Update Dynamic Weapon Information everyframe
+	void GetDynamicWeaponAttributes();
+
+	//Automatic Fire Mechanic
+	void AutomaticMechanic(float DeltaTime);
+
+	//Reload Mechanic
+	void ReloadMechanic(float DeltaTime);
+
+	//Perform reload activity
 	void PerformReload();
 
+	//Finish reload activity
 	void FinishReload();
 
 	//activate reload sequence
@@ -63,28 +81,19 @@ private:
 	bool IsFire;
 
 	// Weapon Attributes
-	int currentAmmo;
-
 	float fireRate;
-
 	int baseDamage;
-
 	int magazineCapacity;
-
 	int batteryConsume;
-
 	int batteryCapacity;
-
 	float reloadTime;
-
 	float recoil;
-
 	float control;
-
 	int accuracy;
-
 	int fireRange;
-
+	
+	// Weapon Dynamic Attributes
+	int currentAmmo;
 	int currentBattery;
 
 	//DEV TEMP

@@ -38,16 +38,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Modify Panel")
 		EWeaponMechanic WeaponMechanic;
 
-	//Get base damage
-	
 	//Get Weapon Type
 	EWeaponMechanic getWeaponMechanic();
 	void updateWeaponMechanic(EWeaponMechanic WeaponMechanic);
 
+	// TODO should delete?
 	UFireMechanicAuto* FireMechanicAuto = nullptr;
 
+	// decease ammo when finish reload
 	void DecreaseAmmo(int amount);
 
+	// check is no ammo in magazine
 	bool IsAmmoDepleted();
 
 	//GET METHOD
@@ -74,8 +75,16 @@ public:
 	int getFireRange();
 
 	int getCurrentBattery();
+	
 	//SET METHOD 
+	
+	//TODO move to inventory class
+	// set new current battery in inventory
 	void setCurrentBattery(int newcurrentbattery);
+
+	// set new current ammo when reload complete
+	void setCurrentAmmo(int newcurrentammo);
+
 private:
 
 	///DYNAMIC VARIABLES
@@ -112,7 +121,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int batteryConsume = 2;
 
-	//TODO move to right place
+	//TODO move to inventory class
 	//current amount of battery carrying in inventory
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int currentBattery = 9999;
