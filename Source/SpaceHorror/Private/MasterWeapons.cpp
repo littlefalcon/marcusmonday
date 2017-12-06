@@ -53,13 +53,23 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 }
 
 ///FUNCTION
-void AMasterWeapons::DecreaseAmmo(int amount) {
+void AMasterWeapons::decreaseAmmo(int amount) {
 	if (currentAmmo == 0) {
 		return;
 	}
 	else
 	{
 		currentAmmo -= amount;
+	}
+}
+
+void AMasterWeapons::inceaseAmmo(int amount) {
+	if (currentAmmo == 0) {
+		return;
+	}
+	else
+	{
+		currentAmmo += amount;
 	}
 }
 

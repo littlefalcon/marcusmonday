@@ -45,8 +45,7 @@ public:
 	// TODO should delete?
 	UFireMechanicAuto* FireMechanicAuto = nullptr;
 
-	// decease ammo function
-	void DecreaseAmmo(int amount);
+	
 
 	// check is no ammo in magazine
 	bool IsAmmoDepleted();
@@ -77,8 +76,9 @@ public:
 	int getCurrentBattery();
 	
 	//SET METHOD 
-	
-	
+	// decease ammo function
+	void decreaseAmmo(int amount);
+	void inceaseAmmo(int amount);
 	// set new current battery in inventory
 	void setCurrentBattery(int newcurrentbattery);//TODO move to inventory class
 

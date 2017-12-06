@@ -57,7 +57,6 @@ void UFireMechanicAuto::ReloadMechanic(float DeltaTime) {
 	if (SpaceHorrorCharacter->IsReload) {
 		PerformReload();
 		reloadTime -= DeltaTime;
-		UE_LOG(LogTemp, Warning, TEXT("Reloading %f"), reloadTime);
 		if (reloadTime <= 0) {
 			FinishReload();
 			reloadTime = MasterWeapons->getReloadTime();
@@ -71,7 +70,7 @@ void UFireMechanicAuto::Fire() {
 	//Muzzle Particle
 	//Fire Animation
 	//Fire Sound
-	MasterWeapons->DecreaseAmmo(1);
+	MasterWeapons->decreaseAmmo(1);
 	currentAmmo = MasterWeapons->getCurrentAmmo();
 	UE_LOG(LogTemp, Warning, TEXT("currentAmmo = %d"),currentAmmo);
 }
@@ -80,7 +79,7 @@ void UFireMechanicAuto::Fire() {
 void UFireMechanicAuto::PerformReload() {
 	if (currentAmmo == magazineCapacity){
 		SpaceHorrorCharacter->setReload(false);
-		UE_LOG(LogTemp, Warning, TEXT("Not Need to Reload"));
+		UE_LOG(LogTemp, Warning, TEXT("Magazine is full no need to reload"));
 		return;
 	}
 	UE_LOG(LogTemp, Warning, TEXT("PerformReload"));
@@ -89,18 +88,21 @@ void UFireMechanicAuto::PerformReload() {
 
 void UFireMechanicAuto::FinishReload() {
 	//find how much bullet need to regain
-	int ammoCost = magazineCapacity - currentAmmo;
+	int usedAmmo = magazineCapacity - currentAmmo;
+	UE_LOG(LogTemp, Warning, TEXT("%d ammo need to regain"), usedAmmo);
+	int ammoCost = usedAmmo;
 	// multiplier with batteryconsume
 	ammoCost = ammoCost * batteryConsume;
 	// decease battery from inventory
 	int deceaseBattery = currentBattery - ammoCost;
 	// set new current battery to inventory
 	MasterWeapons->setCurrentBattery(deceaseBattery);
+	UE_LOG(LogTemp, Warning, TEXT("BatteryConsume = %d"), ammoCost);
 	// set new ammo in magazine
-	//----
+	MasterWeapons->inceaseAmmo(usedAmmo);
 	// exit IsReloading loop
 	SpaceHorrorCharacter->setReload(false);
-	UE_LOG(LogTemp, Warning, TEXT("FinishReload"));
+	UE_LOG(LogTemp, Warning, TEXT("FinishReload CurrentAmmo = %d CurrentBattery = %d"), MasterWeapons->getCurrentAmmo(),MasterWeapons->getCurrentBattery());
 }
 
 void UFireMechanicAuto::GetPlayerInputInformation() {

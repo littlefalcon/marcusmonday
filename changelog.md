@@ -1,3 +1,8 @@
+### SNL9 6/12/17 1408
+* add reload log
+* fix method name
+* add setammo method (inceaseammo(int amount)
+* reload mechanic can regain ammo
 ### SNL8 6/12/17 1341
 * Implement Reload Mechanic
 * currentammo sync to magazinecapacity when begin play
