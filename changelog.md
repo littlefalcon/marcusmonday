@@ -1,6 +1,6 @@
 ### SNL11 7/12/17 1630
 * delete gun mesh at bp_wp_assemble for use gun in bp_fpc
-* try create new gun in bp_fpc 
+* try create new gun in bp_fpc  
 
 ### SNL10 6/12/17 1614
 * block fire when reloading
