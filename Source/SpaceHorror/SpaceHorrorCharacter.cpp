@@ -44,11 +44,13 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 
 	// Create a gun mesh component
 	FP_Gun = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FP_Gun"));
-	FP_Gun->SetOnlyOwnerSee(true);			// only the owning player will see this mesh
+	FP_Gun->SetOnlyOwnerSee(true);		// only the owning player will see this mesh
 	FP_Gun->bCastDynamicShadow = false;
 	FP_Gun->CastShadow = false;
 	// FP_Gun->SetupAttachment(Mesh1P, TEXT("GripPoint"));
 	FP_Gun->SetupAttachment(RootComponent);
+
+	
 
 	FP_MuzzleLocation = CreateDefaultSubobject<USceneComponent>(TEXT("MuzzleLocation"));
 	FP_MuzzleLocation->SetupAttachment(FP_Gun);
@@ -88,7 +90,19 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 	
 	
 }
+void ASpaceHorrorCharacter::CreateCustomGun(FName gunname, USkeletalMeshComponent* gunmesh, USceneComponent* muzzlelocation) {
+	// Create custom gun
+	gunmesh = CreateDefaultSubobject<USkeletalMeshComponent>(gunname);
+	gunmesh->SetOnlyOwnerSee(true);		// only the owning player will see this mesh
+	gunmesh->bCastDynamicShadow = false;
+	gunmesh->CastShadow = false;
+	// DC_Gun->SetupAttachment(Mesh1P, TEXT("GripPoint"));
+	gunmesh->SetupAttachment(RootComponent);
 
+	muzzlelocation = CreateDefaultSubobject<USceneComponent>(TEXT("MuzzleLocation"));
+	muzzlelocation->SetupAttachment(FP_Gun);
+	muzzlelocation->SetRelativeLocation(FVector(0.2f, 48.4f, -10.6f));
+}
 void ASpaceHorrorCharacter::BeginPlay()
 {
 	// Call the base class  

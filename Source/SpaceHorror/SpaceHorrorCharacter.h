@@ -45,7 +45,13 @@ class ASpaceHorrorCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UMotionControllerComponent* L_MotionController;
 	
+	/** CT */
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	class USkeletalMeshComponent* DC_Gun;
 
+	/** Location on gun mesh where projectiles should spawn. */
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	class USceneComponent* DC_MuzzleLocation;
 
 public:
 	ASpaceHorrorCharacter();
@@ -175,7 +181,8 @@ private:
 	void Weapon4();
 	void Weapon5();
 	void Weapon6();
-	
+
+	void CreateCustomGun(FName gunname, USkeletalMeshComponent* gunmesh, USceneComponent* muzzlelocation);
 	
 
 };
