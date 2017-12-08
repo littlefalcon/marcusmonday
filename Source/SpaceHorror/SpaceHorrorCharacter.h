@@ -49,7 +49,7 @@ class ASpaceHorrorCharacter : public ACharacter
 	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
 	class USkeletalMeshComponent* DC_Gun;
 
-	/** Location on gun mesh where projectiles should spawn. */
+	/** CT */
 	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
 	class USceneComponent* DC_MuzzleLocation;
 
@@ -184,6 +184,5 @@ private:
 
 	void CreateCustomGun(FName gunname, USkeletalMeshComponent* gunmesh, USceneComponent* muzzlelocation);
 	
-
 };
 

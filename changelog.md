@@ -1,3 +1,8 @@
+### SNL12 8/12/17 1605
+* delete weaponselector in BP
+* try create new gun in bp_fpc // cancel
+* use arm skeletal socket to connect gun to hand 
+
 ### SNL11 7/12/17 1630
 * delete gun mesh at bp_wp_assemble for use gun in bp_fpc
 * try create new gun in bp_fpc  

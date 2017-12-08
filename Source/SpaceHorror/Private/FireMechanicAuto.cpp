@@ -90,7 +90,7 @@ void UFireMechanicAuto::FinishReload() {
 	//find how much bullet need to regain
 	int usedAmmo = magazineCapacity - currentAmmo;
 	UE_LOG(LogTemp, Warning, TEXT("%d ammo need to regain"), usedAmmo);
-	int ammoCost = usedAmmo;
+	int ammoCost = usedAmmo;	
 	// multiplier with batteryconsume
 	ammoCost = ammoCost * batteryConsume;
 	// decease battery from inventory
