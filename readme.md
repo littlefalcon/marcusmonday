@@ -1,5 +1,5 @@
 # Doing List
-* Refactor Shooting System (Automatic Shoot System)
+* Sync WeaponMaster arttributes to in game weapon
 # TODO List
 * Refactor Shooting System
 * Delete old class

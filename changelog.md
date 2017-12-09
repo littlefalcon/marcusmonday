@@ -1,3 +1,12 @@
+### SNL13 8/12/17 1605
+* handle firing
+	* add kismet gameplaystaticfor sound to master weapon class 
+	* add sound to master class
+* make skeletal mesh to inherit class at masterwapon class
+* rename assemble dc_gun
+* delete DC_Gun
+* delete create gun function
+
 ### SNL12 8/12/17 1605
 * delete weaponselector in BP
 * try create new gun in bp_fpc // cancel

@@ -4,6 +4,7 @@
 #include "MasterWeapons.h"
 #include "SpaceHorrorCharacter.h"
 
+
 UFireMechanicAuto::UFireMechanicAuto()
 {
 
@@ -40,6 +41,7 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 void UFireMechanicAuto::AutomaticMechanic(float DeltaTime) {
 	
 	if (canFire && IsFire) {
+		//return if reloading
 		if (SpaceHorrorCharacter->IsReload) { return; };
 		Fire();
 		canFire = false;
@@ -71,6 +73,7 @@ void UFireMechanicAuto::Fire() {
 	//Muzzle Particle
 	//Fire Animation
 	//Fire Sound
+	MasterWeapons->playSound();
 	MasterWeapons->decreaseAmmo(1);
 	currentAmmo = MasterWeapons->getCurrentAmmo();
 	UE_LOG(LogTemp, Warning, TEXT("currentAmmo = %d"),currentAmmo);

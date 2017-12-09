@@ -22,6 +22,10 @@ class SPACEHORROR_API AMasterWeapons : public AActor
 {
 	GENERATED_BODY()
 	
+	UPROPERTY(VisibleDefaultsOnly, Category = WeaponSkeletal)
+	class USkeletalMeshComponent* Weapon = NULL;
+
+
 public:	
 	// Sets default values for this actor's properties
 	AMasterWeapons();
@@ -44,8 +48,6 @@ public:
 
 	// TODO should delete?
 	UFireMechanicAuto* FireMechanicAuto = nullptr;
-
-	
 
 	// check is no ammo in magazine
 	bool IsAmmoDepleted();
@@ -85,6 +87,12 @@ public:
 	// set new current ammo when reload complete
 	void setCurrentAmmo(int newcurrentammo);
 
+	// sound data
+	UPROPERTY(VisibleDefaultsOnly, Category = WeaponFX)
+	USoundBase* weaponSound = nullptr;
+
+	void playSound();
+	
 private:
 
 	///DYNAMIC VARIABLES

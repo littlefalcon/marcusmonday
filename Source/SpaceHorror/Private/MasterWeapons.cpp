@@ -1,18 +1,23 @@
 // Copyright (c) 2017 LittleFalcon.
 
 #include "MasterWeapons.h"
-#include "FireMechanicAuto.h"
+#include "FireMechanicAuto.h" // Handle Automatic Mechanic for Weapon
+#include "Animation/AnimInstance.h" // Handle SkeletalMesh
+#include "Kismet/GameplayStatics.h" //Handle Particle / Sound
+
 
 // Sets default values
 AMasterWeapons::AMasterWeapons(){
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
 	//Create Inherit Class TODO Create Inherit Class to same with Weapontype
 	FireMechanicAuto = CreateDefaultSubobject<UFireMechanicAuto>(FName("FireMechanicAuto"));
-
-
-	 
+	
+	//TODO Set only player see 
+	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Weapon"));
+	Weapon->SetOnlyOwnerSee(true);		// only the owning player will see this mesh
+	Weapon->bCastDynamicShadow = false;
+	Weapon->CastShadow = false;
 }
 
 // Called when the game starts or when spawned
@@ -22,7 +27,6 @@ void AMasterWeapons::BeginPlay()
 	
 	//Attach to BP_FirstPersonCharacter
 	//attach
-
 	//Check what weapon mechanic in this instance
 	updateWeaponMechanic(WeaponMechanic);
 	
@@ -58,6 +62,10 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 }
 
 ///FUNCTION
+void AMasterWeapons::playSound() {
+	UGameplayStatics::PlaySoundAtLocation(this, weaponSound, Weapon->GetSocketLocation(TEXT("Muzzle")), 1, 1, 0, nullptr, nullptr);
+}
+
 void AMasterWeapons::decreaseAmmo(int amount) {
 	if (currentAmmo == 0) {
 		return;

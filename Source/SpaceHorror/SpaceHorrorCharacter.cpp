@@ -54,18 +54,6 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 	FP_MuzzleLocation->SetupAttachment(FP_Gun);
 	FP_MuzzleLocation->SetRelativeLocation(FVector(0.2f, 48.4f, -10.6f));
 
-	DC_Gun = CreateDefaultSubobject<USkeletalMeshComponent>("DC_Gun");
-	DC_Gun->SetOnlyOwnerSee(true);		// only the owning player will see this mesh
-	DC_Gun->bCastDynamicShadow = false;
-	DC_Gun->CastShadow = false;
-	//DC_Gun->SetupAttachment(Mesh1P, TEXT("GripPoint"));
-	DC_Gun->SetupAttachment(RootComponent);
-
-	DC_MuzzleLocation = CreateDefaultSubobject<USceneComponent>(TEXT("DC_MuzzleLocation"));
-	DC_MuzzleLocation->SetupAttachment(DC_Gun);
-	DC_MuzzleLocation->SetRelativeLocation(FVector(0.2f, 48.4f, -10.6f));
-
-
 	// Default offset from the character location for projectiles to spawn
 	GunOffset = FVector(100.0f, 0.0f, 10.0f);
 
@@ -95,28 +83,21 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 
 	// Uncomment the following line to turn motion controllers on by default:
 	//bUsingMotionControllers = true;
-
-	//DEV createasset and attachto capsule component
+	DC_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("DC_Gun"));
+	DC_Gun->SetupAttachment(RootComponent);
 	
 	
 }
-void ASpaceHorrorCharacter::CreateCustomGun(FName gunname, USkeletalMeshComponent* gunmesh, USceneComponent* muzzlelocation) {
-	// Create custom gun
-	gunmesh = CreateDefaultSubobject<USkeletalMeshComponent>(gunname);
-	gunmesh->SetOnlyOwnerSee(true);		// only the owning player will see this mesh
-	gunmesh->bCastDynamicShadow = false;
-	gunmesh->CastShadow = false;
-	// DC_Gun->SetupAttachment(Mesh1P, TEXT("GripPoint"));
-	gunmesh->SetupAttachment(RootComponent);
 
-	muzzlelocation = CreateDefaultSubobject<USceneComponent>(TEXT("DC_MuzzleLocation"));
-	muzzlelocation->SetupAttachment(gunmesh);
-	muzzlelocation->SetRelativeLocation(FVector(0.2f, 48.4f, -10.6f));
-}
 void ASpaceHorrorCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+
+	
+	//Attach Gun to Player BP
+	DC_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+
 
 	//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
 	FP_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
@@ -313,7 +294,6 @@ void ASpaceHorrorCharacter::setReload(bool setbool) {
 void ASpaceHorrorCharacter::InputFireDown()
 {
 	IsFire = true;
-	
 }
 
 void ASpaceHorrorCharacter::InputFireRelease() {
