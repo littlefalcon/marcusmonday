@@ -70,11 +70,16 @@ void UFireMechanicAuto::ReloadMechanic(float DeltaTime) {
 void UFireMechanicAuto::Fire() {
 	IsPressFire = true;
 	//Spawn Bullet
+	MasterWeapons->spawnProjectileBullet(); // TODO make it dynamic
 	//Muzzle Particle
+	MasterWeapons->spawnParticleMuzzle();
 	//Fire Animation
 	//Fire Sound
-	MasterWeapons->playSound();
+	MasterWeapons->soundFire();
+	//DeceaseAmmo
 	MasterWeapons->decreaseAmmo(1);
+	
+	//Update Ammo to HUD/UI
 	currentAmmo = MasterWeapons->getCurrentAmmo();
 	UE_LOG(LogTemp, Warning, TEXT("currentAmmo = %d"),currentAmmo);
 }

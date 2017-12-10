@@ -4,6 +4,7 @@
 #include "FireMechanicAuto.h" // Handle Automatic Mechanic for Weapon
 #include "Animation/AnimInstance.h" // Handle SkeletalMesh
 #include "Kismet/GameplayStatics.h" //Handle Particle / Sound
+#include "SpaceHorrorProjectile.h" //Handle Projectile Bullet /TODO make this class itself
 
 
 // Sets default values
@@ -62,8 +63,35 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 }
 
 ///FUNCTION
-void AMasterWeapons::playSound() {
+void AMasterWeapons::soundFire() {
 	UGameplayStatics::PlaySoundAtLocation(this, weaponSound, Weapon->GetSocketLocation(TEXT("Muzzle")), 1, 1, 0, nullptr, nullptr);
+}
+
+void AMasterWeapons::spawnParticleMuzzle()
+{
+	UGameplayStatics::SpawnEmitterAtLocation(this, muzzleParticle, Weapon->GetSocketLocation(TEXT("Muzzle")),FRotator::ZeroRotator,FVector::OneVector, true);
+}
+
+void AMasterWeapons::spawnProjectileBullet() {
+	if (ProjectileClass != NULL)
+	{
+		UWorld* const World = GetWorld();
+		if (World != NULL)
+		{
+			FRotator SpawnRotation = GetActorRotation();
+			SpawnRotation.Yaw += 90;
+			// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
+			//const FVector SpawnLocation = (this->GetActorForwardVector() * 2000) + Weapon->GetSocketLocation(TEXT("Muzzle"));;
+			const FVector SpawnLocation = Weapon->GetSocketLocation(TEXT("Muzzle"));
+			//const FVector SpawnLocation = ((FP_MuzzleLocation != nullptr) ? FP_MuzzleLocation->GetComponentLocation() : GetActorLocation()) + SpawnRotation.RotateVector(GunOffset);
+
+			//Set Spawn Collision Handling Override
+			FActorSpawnParameters ActorSpawnParams;
+			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+			// spawn the projectile at the muzzle
+			World->SpawnActor<ASpaceHorrorProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+		}
+	}
 }
 
 void AMasterWeapons::decreaseAmmo(int amount) {

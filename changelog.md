@@ -1,3 +1,13 @@
+### SNL14 12/10/17 2323
+* add spawn particle C++
+* duplicate particle for dummy muzzleparticle
+* #include "SpaceHorrorProjectile.h" at MasterWeapons.cpp
+* spawn projectile bullet in MasterWeapon Class
+* add rotation Yaw+90 for forward bullet
+* bullet will freeze when not use bounce mechanic in ProjectileClass
+* -bug- when camera near obstacle bullet spawn wrong area
+* -bug- bullet forwarding not sync with pitch(updown) 
+
 ### SNL13 8/12/17 1605
 * handle firing
 	* add kismet gameplaystaticfor sound to master weapon class 

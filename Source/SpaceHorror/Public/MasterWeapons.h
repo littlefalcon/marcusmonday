@@ -86,12 +86,24 @@ public:
 
 	// set new current ammo when reload complete
 	void setCurrentAmmo(int newcurrentammo);
+	
+	/** Projectile bullet to spawn */
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile Bullet")
+		TSubclassOf<class ASpaceHorrorProjectile> ProjectileClass;
 
 	// sound data
 	UPROPERTY(EditAnywhere, Category = WeaponFX)
 	USoundBase* weaponSound = nullptr;
 
-	void playSound();
+	// particle data
+	UPROPERTY(EditAnywhere, Category = WeaponFX)
+		UParticleSystem* muzzleParticle = nullptr;
+
+	void soundFire();
+
+	void spawnParticleMuzzle();
+
+	void spawnProjectileBullet();
 	
 private:
 
