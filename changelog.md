@@ -1,4 +1,4 @@
-### SNL14 12/10/17 2323
+### SNL14 10/12/17 2323
 * add spawn particle C++
 * duplicate particle for dummy muzzleparticle
 * #include "SpaceHorrorProjectile.h" at MasterWeapons.cpp
