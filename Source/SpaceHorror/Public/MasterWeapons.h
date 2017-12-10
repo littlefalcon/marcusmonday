@@ -88,7 +88,7 @@ public:
 	void setCurrentAmmo(int newcurrentammo);
 
 	// sound data
-	UPROPERTY(VisibleDefaultsOnly, Category = WeaponFX)
+	UPROPERTY(EditAnywhere, Category = WeaponFX)
 	USoundBase* weaponSound = nullptr;
 
 	void playSound();

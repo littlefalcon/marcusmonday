@@ -77,13 +77,7 @@ void AMasterWeapons::decreaseAmmo(int amount) {
 }
 
 void AMasterWeapons::inceaseAmmo(int amount) {
-	if (currentAmmo == 0) {
-		return;
-	}
-	else
-	{
-		currentAmmo += amount;
-	}
+	currentAmmo += amount;
 }
 
 bool AMasterWeapons::IsAmmoDepleted() {

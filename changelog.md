@@ -6,6 +6,7 @@
 * rename assemble dc_gun
 * delete DC_Gun
 * delete create gun function
+* playsound when fire in BP now play in MasterWeapon class C++ 
 
 ### SNL12 8/12/17 1605
 * delete weaponselector in BP
