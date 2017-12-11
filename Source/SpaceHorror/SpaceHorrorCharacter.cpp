@@ -221,6 +221,7 @@ void ASpaceHorrorCharacter::Tick(float DeltaTime)
 					AnimInstance->Montage_Play(FireAnimation, 1.f);
 				}
 			}
+
 		}
 	}
 

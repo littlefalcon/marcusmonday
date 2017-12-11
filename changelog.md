@@ -1,3 +1,6 @@
+### SNL15 11/12/17 1810
+* FIX -bug- bullet forwarding not sync with pitch(updown) 
+* -bug- when camera near obstacle bullet spawn wrong area *because collision type
 ### SNL14 10/12/17 2323
 * add spawn particle C++
 * duplicate particle for dummy muzzleparticle

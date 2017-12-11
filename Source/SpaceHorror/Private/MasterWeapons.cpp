@@ -78,8 +78,8 @@ void AMasterWeapons::spawnProjectileBullet() {
 		UWorld* const World = GetWorld();
 		if (World != NULL)
 		{
-			FRotator SpawnRotation = GetActorRotation();
-			SpawnRotation.Yaw += 90;
+			FRotator SpawnRotation = Weapon->GetSocketRotation(TEXT("Muzzle"));
+			//SpawnRotation. += 90;
 			// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
 			//const FVector SpawnLocation = (this->GetActorForwardVector() * 2000) + Weapon->GetSocketLocation(TEXT("Muzzle"));;
 			const FVector SpawnLocation = Weapon->GetSocketLocation(TEXT("Muzzle"));
