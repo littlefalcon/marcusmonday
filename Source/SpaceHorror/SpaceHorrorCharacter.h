@@ -48,6 +48,9 @@ class ASpaceHorrorCharacter : public ACharacter
 	UPROPERTY(VisibleDefaultsOnly, Category = Weapon)
 	class UChildActorComponent* DC_Gun = nullptr;
 
+	UPROPERTY(VisibleDefaultsOnly, Category = Weapon)
+		class UChildActorComponent* SA_GUN = nullptr;
+
 
 public:
 	ASpaceHorrorCharacter();
@@ -159,16 +162,11 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 		FVector MuzzleLocation;
 
-	/** Fires a projectile. */
-	//void OnFire();
-	/*add by hex*/
-	//void StopFire();
-
-	int testvar = 1;
-
+	bool canFire = true;
+	bool IsSemi = false;
 private:
 	bool IsFiring = false;
-	bool canFire = false;
+	
 	float CooldownTime = 0;
 	virtual void Tick(float DeltaTime) override;
 	void Weapon1();

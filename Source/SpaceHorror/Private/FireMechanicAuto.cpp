@@ -39,12 +39,20 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 }
 
 void UFireMechanicAuto::AutomaticMechanic(float DeltaTime) {
-	
-	if (canFire && IsFire) {
+	//TODO make new class
+	if (canFire && IsFire && SpaceHorrorCharacter->IsSemi == false) {
 		//return if reloading
 		if (SpaceHorrorCharacter->IsReload) { return; };
+			if (IsSemiGun == false) {
+			Fire();
+			canFire = false;
+		}
+	}
+
+	if (canFire && IsFire && SpaceHorrorCharacter->canFire && SpaceHorrorCharacter->IsSemi) {
 		Fire();
 		canFire = false;
+		SpaceHorrorCharacter->canFire = false;
 	}
 
 	if (!canFire) {

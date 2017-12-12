@@ -41,6 +41,7 @@ public:
 
 	float firedTimeCount = 0;
 
+	bool IsSemiGun;
 
 private:
 
@@ -99,5 +100,7 @@ private:
 	//DEV TEMP
 	//var checking for log 1 time if same number
 	int logCurrentAmmo;
+
+
 
 };

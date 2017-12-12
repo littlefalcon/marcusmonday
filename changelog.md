@@ -1,3 +1,6 @@
+### SNL16 12/12/17 0910
+* Change Weapon
+* make semi in auto class need to change
 ### SNL15 11/12/17 1810
 * FIX -bug- bullet forwarding not sync with pitch(updown) 
 * -bug- when camera near obstacle bullet spawn wrong area *because collision type

@@ -26,11 +26,16 @@ void AMasterWeapons::BeginPlay()
 {
 	Super::BeginPlay();
 	
+
 	//Attach to BP_FirstPersonCharacter
 	//attach
 	//Check what weapon mechanic in this instance
 	updateWeaponMechanic(WeaponMechanic);
 	
+	if (WeaponMechanic == EWeaponMechanic::AUTO) {
+		
+	}
+
 	currentAmmo = magazineCapacity; //TODO sync to upgrade class
 }
 
@@ -48,13 +53,21 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 		UE_LOG(LogTemp, Warning, TEXT("WP - Beam"));
 		break;
 	case EWeaponMechanic::SEMI:
-		UE_LOG(LogTemp, Warning, TEXT("WP - Semi-Auto"));
+		if (FireMechanicAuto != nullptr) {
+			UE_LOG(LogTemp, Warning, TEXT("WP - SemiAutomatic"));
+			FireMechanicAuto->IsSemiGun = true;
+		}
+		else {
+			UE_LOG(LogTemp, Warning, TEXT("WP - SemiAutomatic NOT FOUND"));
+		}
 		break;
 	case EWeaponMechanic::AUTO:
 		if (FireMechanicAuto != nullptr) {
 			UE_LOG(LogTemp, Warning, TEXT("WP - Automatic"));
 			FireMechanicAuto->IsHoldingThisWeapon = true;
-		}else{UE_LOG(LogTemp, Warning, TEXT("WP - Automatic NOT FOUND"));}
+		}else{
+			UE_LOG(LogTemp, Warning, TEXT("WP - Automatic NOT FOUND"));
+		}
 		break;
 	case EWeaponMechanic::CHRG:
 		UE_LOG(LogTemp, Warning, TEXT("WP - Charge"));

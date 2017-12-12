@@ -86,6 +86,8 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 	DC_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("DC_Gun"));
 	DC_Gun->SetupAttachment(RootComponent);
 	
+	SA_GUN = CreateDefaultSubobject<UChildActorComponent>(TEXT("SA_Gun"));
+	SA_GUN->SetupAttachment(RootComponent);
 	
 }
 
@@ -93,15 +95,15 @@ void ASpaceHorrorCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
-
+	
 	
 	//Attach Gun to Player BP
 	DC_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
-
+	SA_GUN->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 
 	//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
 	FP_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
-
+	
 	// Show or hide the two versions of the gun based on whether or not we're using motion controllers.
 	if (bUsingMotionControllers)
 	{
@@ -113,6 +115,9 @@ void ASpaceHorrorCharacter::BeginPlay()
 		VR_Gun->SetHiddenInGame(true, true);
 		Mesh1P->SetHiddenInGame(false, true);
 	}
+
+	//Default select weapon
+	Weapon2();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -165,123 +170,6 @@ void ASpaceHorrorCharacter::Tick(float DeltaTime)
 	
 	MuzzleLocation = FP_MuzzleLocation->GetComponentLocation();
 
-	if (WeaponSelecter == 1) {
-		if (canFire == false) {
-			CooldownTime += DeltaTime;
-			if (CooldownTime > 0.2f) {
-				canFire = true;
-				CooldownTime = 0;
-			}
-		}
-
-		if (IsFiring && canFire) {
-			canFire = false;
-			UE_LOG(LogTemp, Warning, TEXT("Firing"));
-			// try and fire a projectile
-			if (ProjectileClass != NULL)
-			{
-				UWorld* const World = GetWorld();
-				if (World != NULL)
-				{
-					if (bUsingMotionControllers)
-					{
-						const FRotator SpawnRotation = VR_MuzzleLocation->GetComponentRotation();
-						const FVector SpawnLocation = VR_MuzzleLocation->GetComponentLocation();
-						World->SpawnActor<ASpaceHorrorProjectile>(ProjectileClass, SpawnLocation, SpawnRotation);
-					}
-					else
-					{
-						const FRotator SpawnRotation = GetControlRotation();
-						// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
-						const FVector SpawnLocation = ((FP_MuzzleLocation != nullptr) ? FP_MuzzleLocation->GetComponentLocation() : GetActorLocation()) + SpawnRotation.RotateVector(GunOffset);
-						
-						//Set Spawn Collision Handling Override
-						FActorSpawnParameters ActorSpawnParams;
-						ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
-
-						// spawn the projectile at the muzzle
-						World->SpawnActor<ASpaceHorrorProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
-					}
-				}
-			}
-
-			// try and play the sound if specified
-			if (FireSound != NULL)
-			{
-				UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
-			}
-
-			// try and play a firing animation if specified
-			if (FireAnimation != NULL)
-			{
-				// Get the animation object for the arms mesh
-				UAnimInstance* AnimInstance = Mesh1P->GetAnimInstance();
-				if (AnimInstance != NULL)
-				{
-					AnimInstance->Montage_Play(FireAnimation, 1.f);
-				}
-			}
-
-		}
-	}
-
-	if (WeaponSelecter == 2 || WeaponSelecter == 4) {
-		if (canFire == false) {
-			CooldownTime += DeltaTime;
-			if (CooldownTime > 0.6f) {
-				canFire = true;
-				CooldownTime = 0;
-			}
-		}
-		if (IsFiring && canFire) {
-			canFire = false;
-			IsFiring = false;
-			UE_LOG(LogTemp, Warning, TEXT("Semi - Firing"));
-			// try and fire a projectile
-			if (ProjectileClass != NULL)
-			{
-				UWorld* const World = GetWorld();
-				if (World != NULL)
-				{
-					if (bUsingMotionControllers)
-					{
-						const FRotator SpawnRotation = VR_MuzzleLocation->GetComponentRotation();
-						const FVector SpawnLocation = VR_MuzzleLocation->GetComponentLocation();
-						World->SpawnActor<ASpaceHorrorProjectile>(ProjectileClass, SpawnLocation, SpawnRotation);
-					}
-					else
-					{
-						const FRotator SpawnRotation = GetControlRotation();
-						// MuzzleOffset is in camera space, so transform it to world space before offsetting from the character location to find the final muzzle position
-						const FVector SpawnLocation = ((FP_MuzzleLocation != nullptr) ? FP_MuzzleLocation->GetComponentLocation() : GetActorLocation()) + SpawnRotation.RotateVector(GunOffset);
-						//Set Spawn Collision Handling Override
-						FActorSpawnParameters ActorSpawnParams;
-						ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
-
-						// spawn the projectile at the muzzle
-						World->SpawnActor<ASpaceHorrorProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
-					}
-				}
-			}
-
-			// try and play the sound if specified
-			if (FireSound != NULL)
-			{
-				UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
-			}
-
-			// try and play a firing animation if specified
-			if (FireAnimation != NULL)
-			{
-				// Get the animation object for the arms mesh
-				UAnimInstance* AnimInstance = Mesh1P->GetAnimInstance();
-				if (AnimInstance != NULL)
-				{
-					AnimInstance->Montage_Play(FireAnimation, 1.f);
-				}
-			}
-		}
-	}
 }
 
 void ASpaceHorrorCharacter::Reload() {
@@ -300,6 +188,7 @@ void ASpaceHorrorCharacter::InputFireDown()
 void ASpaceHorrorCharacter::InputFireRelease() {
 	UE_LOG(LogTemp, Warning, TEXT("Relase Fire"));
 	IsFire = false;
+	canFire = true; //TODO make in semi-auto class
 }
 
 void ASpaceHorrorCharacter::Weapon1()
@@ -308,6 +197,9 @@ void ASpaceHorrorCharacter::Weapon1()
 	{
 		WeaponSelecter = 0;
 		UE_LOG(LogTemp, Warning, TEXT("Select Door Cutter"));
+		IsSemi = false;
+		DC_Gun->SetHiddenInGame(false, true);
+		SA_GUN->SetHiddenInGame(true, true);
 	}
 }
 
@@ -316,7 +208,10 @@ void ASpaceHorrorCharacter::Weapon2()
 	if (WeaponSelecter != 1)
 	{
 		WeaponSelecter = 1;
+		IsSemi = true;
 		UE_LOG(LogTemp, Warning, TEXT("Select Gauss Rifle"));
+		SA_GUN->SetHiddenInGame(false, true);
+		DC_Gun->SetHiddenInGame(true, true);
 	}
 }
 
