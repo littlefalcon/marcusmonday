@@ -1,3 +1,6 @@
+### SNL17 13/12/17 1923
+* FireMechanicAuto adapt use for semi
+* refactor fire mechenic semi and autoS
 ### SNL16 12/12/17 0910
 * Change Weapon
 * make semi in auto class need to change

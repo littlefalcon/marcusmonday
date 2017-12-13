@@ -1,5 +1,6 @@
 # Doing List
-* Sync WeaponMaster arttributes to in game weapon
+* improve semi and auto fire mechanic in class
+* Add new 3 class (all type of weapon mechanics)
 # TODO List
 * Refactor Shooting System
 * Delete old class

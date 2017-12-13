@@ -53,6 +53,8 @@ public:
 	bool IsAmmoDepleted();
 
 	//GET METHOD
+	int getWeaponSlot();
+
 	int getCurrentAmmo();
 
 	float getFireRate();
@@ -76,7 +78,6 @@ public:
 	int getFireRange();
 
 	int getCurrentBattery();
-	
 	//SET METHOD 
 	// decease ammo function
 	void decreaseAmmo(int amount);
@@ -125,6 +126,10 @@ private:
 		float chargePoints = chargeTime / maxCharge;
 
 	///STATIC VARIABLES
+	// Weapon Slot
+	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
+		int weaponSlot;
+
 	// Set base damage
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int fireDamage = 50;

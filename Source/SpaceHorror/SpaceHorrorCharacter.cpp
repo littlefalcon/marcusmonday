@@ -135,7 +135,7 @@ void ASpaceHorrorCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	if (EnableTouchscreenMovement(PlayerInputComponent) == false)
 	{
 		PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ASpaceHorrorCharacter::InputFireDown);
-		PlayerInputComponent->BindAction("Fire", IE_Released, this, &ASpaceHorrorCharacter::InputFireRelease);
+		PlayerInputComponent->BindAction("Fire", IE_Released, this, &ASpaceHorrorCharacter::InputFireUp);
 	}
 
 	//Weapon Selecter TODO MAKE TO ENUM
@@ -183,12 +183,13 @@ void ASpaceHorrorCharacter::setReload(bool setbool) {
 void ASpaceHorrorCharacter::InputFireDown()
 {
 	IsFire = true;
+	IsFireInputDown = true;
 }
 
-void ASpaceHorrorCharacter::InputFireRelease() {
+void ASpaceHorrorCharacter::InputFireUp() {
 	UE_LOG(LogTemp, Warning, TEXT("Relase Fire"));
 	IsFire = false;
-	canFire = true; //TODO make in semi-auto class
+	IsFireInputUp = true;
 }
 
 void ASpaceHorrorCharacter::Weapon1()
@@ -197,7 +198,6 @@ void ASpaceHorrorCharacter::Weapon1()
 	{
 		WeaponSelecter = 0;
 		UE_LOG(LogTemp, Warning, TEXT("Select Door Cutter"));
-		IsSemi = false;
 		DC_Gun->SetHiddenInGame(false, true);
 		SA_GUN->SetHiddenInGame(true, true);
 	}
@@ -208,7 +208,6 @@ void ASpaceHorrorCharacter::Weapon2()
 	if (WeaponSelecter != 1)
 	{
 		WeaponSelecter = 1;
-		IsSemi = true;
 		UE_LOG(LogTemp, Warning, TEXT("Select Gauss Rifle"));
 		SA_GUN->SetHiddenInGame(false, true);
 		DC_Gun->SetHiddenInGame(true, true);
@@ -254,10 +253,6 @@ void ASpaceHorrorCharacter::Weapon6()
 		UE_LOG(LogTemp, Warning, TEXT("Select Stun Gun"));
 	}
 }
-
-
-
-
 
 void ASpaceHorrorCharacter::OnResetVR()
 {

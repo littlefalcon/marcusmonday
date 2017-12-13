@@ -29,34 +29,31 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	//Update current ammo
 	GetDynamicWeaponAttributes();
+	
 	//Wait for player input every frame
 	GetPlayerInputInformation();
-	//Handle Firing
-	AutomaticMechanic(DeltaTime);
+	
+	//Handle Firing 
+	//Allow fire if currentweaponslot same as this weaponslot
+	if (currentWeapon == weaponSlot) {
+		AutomaticMechanic();
+		SemiMechanic();
+	}
+	
+	
+	//Handle firerate
+	FirerateControl(DeltaTime);
+	
 	//Handle Reload
 	ReloadMechanic(DeltaTime);
 	
 }
 
-void UFireMechanicAuto::AutomaticMechanic(float DeltaTime) {
-	//TODO make new class
-	if (canFire && IsFire && SpaceHorrorCharacter->IsSemi == false) {
-		//return if reloading
-		if (SpaceHorrorCharacter->IsReload) { return; };
-			if (IsSemiGun == false) {
-			Fire();
-			canFire = false;
-		}
-	}
-
-	if (canFire && IsFire && SpaceHorrorCharacter->canFire && SpaceHorrorCharacter->IsSemi) {
-		Fire();
-		canFire = false;
-		SpaceHorrorCharacter->canFire = false;
-	}
+void UFireMechanicAuto::FirerateControl(float DeltaTime) {
 
 	if (!canFire) {
 		firedTimeCount += DeltaTime;
+		//canfire if cooldown time more than firerate and ammo is left in magazine
 		if (firedTimeCount > fireRate && !MasterWeapons->IsAmmoDepleted()) {
 			canFire = true;
 			firedTimeCount = 0;
@@ -64,8 +61,38 @@ void UFireMechanicAuto::AutomaticMechanic(float DeltaTime) {
 	}
 }
 
+void UFireMechanicAuto::AutomaticMechanic() {
+	if (IsSemiMechanic) { return; } //return if semiautomatic gun
+
+	if (canFire && IsInputFireDown) {
+		//return if reloading
+		if (IsReload) { return; };
+			Fire();
+			canFire = false;
+			UE_LOG(LogTemp, Warning, TEXT("AutoFire"));
+	}
+
+}
+
+
+void UFireMechanicAuto::SemiMechanic() {
+	if (!IsSemiMechanic) { return; } //return if not semiautomatic gun
+	
+	//release fire it will can fire 
+	if (IsInputFireUp) {
+		if (canFire & IsInputFireDown) {
+			if (IsReload) { return; };
+			Fire();
+			canFire = false;
+			SpaceHorrorCharacter->IsFireInputUp = false;
+			UE_LOG(LogTemp, Warning, TEXT("SemiFire"));
+		}
+	}
+}
+
+
 void UFireMechanicAuto::ReloadMechanic(float DeltaTime) {
-	if (SpaceHorrorCharacter->IsReload) {
+	if (IsReload) {
 		PerformReload();
 		reloadTime -= DeltaTime;
 		if (reloadTime <= 0) {
@@ -124,14 +151,21 @@ void UFireMechanicAuto::FinishReload() {
 void UFireMechanicAuto::GetPlayerInputInformation() {
 	//Get Control Class Everyframe
 	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
-	//Get FireButton Input
-	IsFire = SpaceHorrorCharacter->IsFire;
-	//Get Reload Input
-	//IsReloading = SpaceHorrorCharacter->IsReload;
+	//TODO some need change to get method
+	//Get FireInput Is Down?
+	IsInputFireDown = SpaceHorrorCharacter->IsFire;
+	//Get FireInput Is Up?
+	IsInputFireUp = SpaceHorrorCharacter->IsFireInputUp;
+	//Get IsReloading Sequencing?
+	IsReload = SpaceHorrorCharacter->IsReload;
+	currentWeapon = SpaceHorrorCharacter->WeaponSelecter;
+
 }
 
 void UFireMechanicAuto::GetWeaponAttributes() {
 	
+	weaponSlot = MasterWeapons->getWeaponSlot();;
+
 	currentAmmo = MasterWeapons->getCurrentAmmo();
 
 	fireRate = MasterWeapons->getFireRate();

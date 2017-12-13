@@ -55,7 +55,7 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 	case EWeaponMechanic::SEMI:
 		if (FireMechanicAuto != nullptr) {
 			UE_LOG(LogTemp, Warning, TEXT("WP - SemiAutomatic"));
-			FireMechanicAuto->IsSemiGun = true;
+			FireMechanicAuto->IsSemiMechanic = true;
 		}
 		else {
 			UE_LOG(LogTemp, Warning, TEXT("WP - SemiAutomatic NOT FOUND"));
@@ -65,6 +65,7 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 		if (FireMechanicAuto != nullptr) {
 			UE_LOG(LogTemp, Warning, TEXT("WP - Automatic"));
 			FireMechanicAuto->IsHoldingThisWeapon = true;
+			FireMechanicAuto->IsSemiMechanic = false;
 		}else{
 			UE_LOG(LogTemp, Warning, TEXT("WP - Automatic NOT FOUND"));
 		}
@@ -107,7 +108,7 @@ void AMasterWeapons::spawnProjectileBullet() {
 	}
 }
 
-void AMasterWeapons::decreaseAmmo(int amount) {
+void AMasterWeapons::decreaseAmmo(int amount) { //TODO Clamp amount
 	if (currentAmmo == 0) {
 		return;
 	}
@@ -143,6 +144,11 @@ void AMasterWeapons::setCurrentAmmo(int newcurrentammo)
 	currentAmmo = newcurrentammo;
 }
 ///Get Method
+
+int AMasterWeapons::getWeaponSlot(){
+	return weaponSlot;
+}
+
 int AMasterWeapons::getCurrentAmmo()
 {
 	return currentAmmo;

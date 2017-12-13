@@ -41,7 +41,7 @@ public:
 
 	float firedTimeCount = 0;
 
-	bool IsSemiGun;
+	bool IsSemiMechanic = false;
 
 private:
 
@@ -64,7 +64,13 @@ private:
 	void GetDynamicWeaponAttributes();
 
 	//Automatic Fire Mechanic
-	void AutomaticMechanic(float DeltaTime);
+	void AutomaticMechanic();
+
+	//Semi Fire Mechanic
+	void SemiMechanic();
+
+	//Firerate Controller
+	void FirerateControl(float DeltaTime);
 
 	//Reload Mechanic
 	void ReloadMechanic(float DeltaTime);
@@ -75,11 +81,17 @@ private:
 	//Finish reload activity
 	void FinishReload();
 
+	//Weapon Slot Number
+	int weaponSlot;
+
 	//activate reload sequence
 	//bool IsReloading;
 
 	//Player Input Variables
-	bool IsFire;
+	bool IsReload;
+	bool IsInputFireUp;
+	bool IsInputFireDown;
+	int currentWeapon;
 
 	// Weapon Attributes
 	float fireRate;
@@ -100,7 +112,6 @@ private:
 	//DEV TEMP
 	//var checking for log 1 time if same number
 	int logCurrentAmmo;
-
 
 
 };

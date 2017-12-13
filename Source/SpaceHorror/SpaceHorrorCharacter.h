@@ -89,7 +89,7 @@ public:
 
 	void InputFireDown();
 
-	void InputFireRelease();
+	void InputFireUp();
 
 	bool IsFire = false;
 
@@ -100,8 +100,6 @@ public:
 	void Reload();
 
 protected:
-	
-	
 
 	/** Resets HMD orientation and position in VR. */
 	void OnResetVR();
@@ -162,7 +160,8 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 		FVector MuzzleLocation;
 
-	bool canFire = true;
+	bool IsFireInputUp = true;
+	bool IsFireInputDown = false;
 	bool IsSemi = false;
 private:
 	bool IsFiring = false;
