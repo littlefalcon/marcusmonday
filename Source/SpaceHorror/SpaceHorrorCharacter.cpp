@@ -88,6 +88,9 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 	
 	SA_GUN = CreateDefaultSubobject<UChildActorComponent>(TEXT("SA_Gun"));
 	SA_GUN->SetupAttachment(RootComponent);
+
+	B_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("B_Gun"));
+	B_Gun->SetupAttachment(RootComponent);
 	
 }
 
@@ -100,6 +103,7 @@ void ASpaceHorrorCharacter::BeginPlay()
 	//Attach Gun to Player BP
 	DC_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 	SA_GUN->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	B_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 
 	//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
 	FP_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));

@@ -1,3 +1,5 @@
+### SNL18 14/12/17 0120
+* add inherit beam class in bp
 ### SNL17 13/12/17 1923
 * FireMechanicAuto adapt use for semi
 * refactor fire mechenic semi and autoS

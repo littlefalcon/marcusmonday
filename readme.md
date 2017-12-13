@@ -1,6 +1,5 @@
 # Doing List
-* improve semi and auto fire mechanic in class
-* Add new 3 class (all type of weapon mechanics)
+* add beam bp and inherit beam mechacic class to bp
 # TODO List
 * Refactor Shooting System
 * Delete old class

@@ -2,6 +2,8 @@
 
 #include "MasterWeapons.h"
 #include "FireMechanicAuto.h" // Handle Automatic Mechanic for Weapon
+#include "FireMechanicBeam.h" // Handle Beam Mechanic for Weapon
+#include "FireMechanicCharge.h" // Handle Charge Mechanic for Weapon
 #include "Animation/AnimInstance.h" // Handle SkeletalMesh
 #include "Kismet/GameplayStatics.h" //Handle Particle / Sound
 #include "SpaceHorrorProjectile.h" //Handle Projectile Bullet /TODO make this class itself
@@ -13,7 +15,7 @@ AMasterWeapons::AMasterWeapons(){
 	PrimaryActorTick.bCanEverTick = false;
 	//Create Inherit Class TODO Create Inherit Class to same with Weapontype
 	FireMechanicAuto = CreateDefaultSubobject<UFireMechanicAuto>(FName("FireMechanicAuto"));
-	
+	FireMechanicBeam = CreateDefaultSubobject<UFireMechanicBeam>(FName("FireMechanicBeam"));
 	//TODO Set only player see 
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Weapon"));
 	Weapon->SetOnlyOwnerSee(true);		// only the owning player will see this mesh
@@ -32,10 +34,6 @@ void AMasterWeapons::BeginPlay()
 	//Check what weapon mechanic in this instance
 	updateWeaponMechanic(WeaponMechanic);
 	
-	if (WeaponMechanic == EWeaponMechanic::AUTO) {
-		
-	}
-
 	currentAmmo = magazineCapacity; //TODO sync to upgrade class
 }
 

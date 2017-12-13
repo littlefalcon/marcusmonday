@@ -7,6 +7,8 @@
 #include "MasterWeapons.generated.h"
 
 class UFireMechanicAuto;
+class UFireMechanicBeam;
+class UFireMechanicCharge;
 
 UENUM(BlueprintType)		//"BlueprintType" is essential to include
 enum class EWeaponMechanic : uint8
@@ -48,6 +50,10 @@ public:
 
 	// TODO should delete?
 	UFireMechanicAuto* FireMechanicAuto = nullptr;
+
+	UFireMechanicBeam* FireMechanicBeam = nullptr;
+
+	UFireMechanicCharge* FireMechanicCharge = nullptr;
 
 	// check is no ammo in magazine
 	bool IsAmmoDepleted();

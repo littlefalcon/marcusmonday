@@ -45,11 +45,14 @@ class ASpaceHorrorCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UMotionControllerComponent* L_MotionController;
 	
-	UPROPERTY(VisibleDefaultsOnly, Category = Weapon)
+	UPROPERTY(VisibleDefaultsOnly, Category = Weapon) //TODO Make to Array
 	class UChildActorComponent* DC_Gun = nullptr;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Weapon)
-		class UChildActorComponent* SA_GUN = nullptr;
+	class UChildActorComponent* SA_GUN = nullptr;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = Weapon)
+	class UChildActorComponent* B_Gun = nullptr;
 
 
 public:
