@@ -1,3 +1,6 @@
+### SNL19 16/12/17 2229
+*add BP_Beam to bp_wp_beam 
+*beam visual code complete
 ### SNL18 14/12/17 0120
 * add inherit beam class in bp
 ### SNL17 13/12/17 1923

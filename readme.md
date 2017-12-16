@@ -1,5 +1,5 @@
 # Doing List
-* add beam bp and inherit beam mechacic class to bp
+* Beam Class Implement
 # TODO List
 * Refactor Shooting System
 * Delete old class

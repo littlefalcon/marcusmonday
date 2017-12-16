@@ -40,7 +40,6 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		SemiMechanic();
 	}
 	
-	
 	//Handle firerate
 	FirerateControl(DeltaTime);
 	

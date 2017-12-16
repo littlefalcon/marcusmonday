@@ -120,8 +120,14 @@ void ASpaceHorrorCharacter::BeginPlay()
 		Mesh1P->SetHiddenInGame(false, true);
 	}
 
+	DC_Gun->SetHiddenInGame(false, true);
+	SA_GUN->SetHiddenInGame(false, true);
+	B_Gun->SetHiddenInGame(false, true);
+
 	//Default select weapon
 	Weapon2();
+
+	
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -202,8 +208,11 @@ void ASpaceHorrorCharacter::Weapon1()
 	{
 		WeaponSelecter = 0;
 		UE_LOG(LogTemp, Warning, TEXT("Select Door Cutter"));
+		B_Gun->SetHiddenInGame(true, true);
+
 		DC_Gun->SetHiddenInGame(false, true);
-		SA_GUN->SetHiddenInGame(true, true);
+		SA_GUN->SetHiddenInGame(false, true);
+		
 	}
 }
 
@@ -213,8 +222,10 @@ void ASpaceHorrorCharacter::Weapon2()
 	{
 		WeaponSelecter = 1;
 		UE_LOG(LogTemp, Warning, TEXT("Select Gauss Rifle"));
-		SA_GUN->SetHiddenInGame(false, true);
 		DC_Gun->SetHiddenInGame(true, true);
+		
+		SA_GUN->SetHiddenInGame(false, true);
+		B_Gun->SetHiddenInGame(false, true);
 	}
 }
 
@@ -225,6 +236,11 @@ void ASpaceHorrorCharacter::Weapon3()
 	{
 		WeaponSelecter = 2;
 		UE_LOG(LogTemp, Warning, TEXT("Select Force Gun"));
+		SA_GUN->SetHiddenInGame(true, true);
+
+		DC_Gun->SetHiddenInGame(false, true);
+		B_Gun->SetHiddenInGame(false, true);
+
 	}
 }
 

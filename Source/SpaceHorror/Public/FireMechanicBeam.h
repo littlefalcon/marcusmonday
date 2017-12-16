@@ -6,7 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "FireMechanicBeam.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SPACEHORROR_API UFireMechanicBeam : public UActorComponent
 {
@@ -24,6 +23,9 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+
+private:
+
+	void BeamMechanic();
 	
 };

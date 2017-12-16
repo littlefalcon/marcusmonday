@@ -2,7 +2,6 @@
 
 #include "FireMechanicBeam.h"
 
-
 // Sets default values for this component's properties
 UFireMechanicBeam::UFireMechanicBeam()
 {
@@ -18,7 +17,8 @@ UFireMechanicBeam::UFireMechanicBeam()
 void UFireMechanicBeam::BeginPlay()
 {
 	Super::BeginPlay();
-
+	//SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	
 	// ...
 	
 }
@@ -30,5 +30,17 @@ void UFireMechanicBeam::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+	//Wait for input
+	BeamMechanic();
 }
+
+void UFireMechanicBeam::BeamMechanic() {
+	//Spawn Beam particle
+		//get beamsource
+		
+		//find hitloc by linetrace
+		//find 
+	//deceaseammo
+}
+
 
