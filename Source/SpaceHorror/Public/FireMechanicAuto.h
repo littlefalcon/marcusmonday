@@ -6,8 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "FireMechanicAuto.generated.h"
 
-
-
 class AMasterWeapons;
 class ASpaceHorrorCharacter;
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -28,6 +26,8 @@ public:
 	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	void SemiHitScan();
 
 	bool IsHoldingThisWeapon;
 
@@ -59,6 +59,8 @@ private:
 
 	//Get Weapon Information
 	void GetWeaponAttributes();
+
+	
 
 	//Update Dynamic Weapon Information everyframe
 	void GetDynamicWeaponAttributes();

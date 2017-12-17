@@ -43,6 +43,12 @@ void AMasterWeapons::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void AMasterWeapons::SemiHitScan()
+{
+	FireMechanicAuto->SemiHitScan();
+	
+}
+
 //Check Weapon Mechanic of this Weapon Blueprint
 void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 	switch (WeaponMechanic)

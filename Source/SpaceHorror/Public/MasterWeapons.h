@@ -24,13 +24,16 @@ class SPACEHORROR_API AMasterWeapons : public AActor
 {
 	GENERATED_BODY()
 	
-	UPROPERTY(VisibleDefaultsOnly, Category = WeaponSkeletal)
-	class USkeletalMeshComponent* Weapon = NULL;
+	
 
 
 public:	
 	// Sets default values for this actor's properties
 	AMasterWeapons();
+
+	UPROPERTY(BlueprintReadWrite, Category = WeaponSkeletal)
+		class USkeletalMeshComponent* Weapon = NULL;
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -40,6 +43,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+		void SemiHitScan();
 	//Set Weapon Mechanic
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Modify Panel")
 		EWeaponMechanic WeaponMechanic;
@@ -54,6 +59,10 @@ public:
 	UFireMechanicBeam* FireMechanicBeam = nullptr;
 
 	UFireMechanicCharge* FireMechanicCharge = nullptr;
+
+	// Tick for Hitscan bullet
+	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
+		bool IsHitScan;
 
 	// check is no ammo in magazine
 	bool IsAmmoDepleted();
@@ -111,6 +120,10 @@ public:
 	void spawnParticleMuzzle();
 
 	void spawnProjectileBullet();
+
+	//todo delete
+	UPROPERTY(BlueprintReadWrite)
+	bool Pressed; 
 	
 private:
 
@@ -135,6 +148,8 @@ private:
 	// Weapon Slot
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int weaponSlot;
+
+	
 
 	// Set base damage
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")

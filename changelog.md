@@ -1,3 +1,8 @@
+### SNL21 17/12/17 1726
+* change bullet color
+* add hitscan
+* change weight of projectile
+* BUG projectile bullet sway relative with gun need change to ref by crooshair
 ### SNL20 17/12/17 1440
 * BP access bug stop do beam
 ### SNL19 16/12/17 2229

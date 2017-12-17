@@ -36,8 +36,15 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		//Handle Firing 
 		//Allow fire if currentweaponslot same as this weaponslot
 		if (currentWeapon == weaponSlot) {
-			AutomaticMechanic();
-			SemiMechanic();
+			if (MasterWeapons->IsHitScan) {
+				//SemiHitScan();
+			}
+			else
+			{
+				AutomaticMechanic();
+				SemiMechanic();
+			}
+			
 		}
 
 		//Handle firerate
@@ -46,8 +53,33 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 		//Handle Reload
 		ReloadMechanic(DeltaTime);
 	}
-	
-	
+}
+
+void UFireMechanicAuto::SemiHitScan() { // BUG cant double function
+	if (IsInputFireUp) {
+		if (canFire & IsInputFireDown) {
+			if (IsReload) { return; };
+			//HITSCANFIRE 
+			IsPressFire = true;
+			MasterWeapons->Pressed = true;
+			//Spawn Bullet
+			//MasterWeapons->spawnParticleMuzzle();
+			//Fire Animation
+			//Fire Sound
+			//MasterWeapons->soundFire();
+			//DeceaseAmmo
+			MasterWeapons->decreaseAmmo(1);
+			//Update Ammo to HUD/UI
+			currentAmmo = MasterWeapons->getCurrentAmmo();
+			UE_LOG(LogTemp, Warning, TEXT("currentAmmo = %d"), currentAmmo);
+			//HITSCANFIRE
+			canFire = false;
+			UE_LOG(LogTemp, Warning, TEXT("AutoFire"));
+			canFire = false;
+			SpaceHorrorCharacter->IsFireInputUp = false;
+			UE_LOG(LogTemp, Warning, TEXT("Hitfire"));
+		}
+	}
 }
 
 void UFireMechanicAuto::FirerateControl(float DeltaTime) {
@@ -75,7 +107,6 @@ void UFireMechanicAuto::AutomaticMechanic() {
 
 }
 
-
 void UFireMechanicAuto::SemiMechanic() {
 	if (!IsSemiMechanic) { return; } //return if not semiautomatic gun
 	
@@ -90,7 +121,6 @@ void UFireMechanicAuto::SemiMechanic() {
 		}
 	}
 }
-
 
 void UFireMechanicAuto::ReloadMechanic(float DeltaTime) {
 	if (IsReload) {
@@ -119,7 +149,6 @@ void UFireMechanicAuto::Fire() {
 	currentAmmo = MasterWeapons->getCurrentAmmo();
 	UE_LOG(LogTemp, Warning, TEXT("currentAmmo = %d"),currentAmmo);
 }
-
 
 void UFireMechanicAuto::PerformReload() {
 	if (currentAmmo == magazineCapacity){
@@ -201,7 +230,6 @@ void UFireMechanicAuto::GetDynamicWeaponAttributes() {
 	currentBattery = MasterWeapons->getCurrentBattery();
 
 }
-
 
 float UFireMechanicAuto::ConvertFireRate(float firerate) {
 	return 60 / firerate;
