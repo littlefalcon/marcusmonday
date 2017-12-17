@@ -49,10 +49,12 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 	{
 	case EWeaponMechanic::BEAM:
 		UE_LOG(LogTemp, Warning, TEXT("WP - Beam"));
+		FireMechanicAuto->IsHoldingThisWeapon = false;
 		break;
 	case EWeaponMechanic::SEMI:
 		if (FireMechanicAuto != nullptr) {
 			UE_LOG(LogTemp, Warning, TEXT("WP - SemiAutomatic"));
+			FireMechanicAuto->IsHoldingThisWeapon = true;
 			FireMechanicAuto->IsSemiMechanic = true;
 		}
 		else {

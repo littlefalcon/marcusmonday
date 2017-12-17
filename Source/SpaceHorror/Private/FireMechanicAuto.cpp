@@ -26,25 +26,27 @@ void UFireMechanicAuto::BeginPlay()
 void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	if (IsHoldingThisWeapon) {
+		//Update current ammo
+		GetDynamicWeaponAttributes();
 
-	//Update current ammo
-	GetDynamicWeaponAttributes();
-	
-	//Wait for player input every frame
-	GetPlayerInputInformation();
-	
-	//Handle Firing 
-	//Allow fire if currentweaponslot same as this weaponslot
-	if (currentWeapon == weaponSlot) {
-		AutomaticMechanic();
-		SemiMechanic();
+		//Wait for player input every frame
+		GetPlayerInputInformation();
+
+		//Handle Firing 
+		//Allow fire if currentweaponslot same as this weaponslot
+		if (currentWeapon == weaponSlot) {
+			AutomaticMechanic();
+			SemiMechanic();
+		}
+
+		//Handle firerate
+		FirerateControl(DeltaTime);
+
+		//Handle Reload
+		ReloadMechanic(DeltaTime);
 	}
 	
-	//Handle firerate
-	FirerateControl(DeltaTime);
-	
-	//Handle Reload
-	ReloadMechanic(DeltaTime);
 	
 }
 
