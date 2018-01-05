@@ -1,4 +1,9 @@
-### SNL22 5/1/18 1726
+### SNL23 5/1/18 1455
+* refactor FireMechacnicAuto
+	* change fire checker to hitscan or projectile (old is check semi or auto)
+	* weapon can fire again bug because currentweapon check before get from character
+
+### SNL22 5/1/18 1426
 * refactor FireMechacnicAuto
 	* move most code in tick to check weapon block
 	* wip make weapon fire again

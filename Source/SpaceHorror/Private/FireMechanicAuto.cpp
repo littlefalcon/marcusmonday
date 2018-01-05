@@ -27,6 +27,9 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
+	//Wait for player input every frame
+	GetPlayerInputInformation();
+
 	//true if Player Currenty Holding this weapon
 	if (IsHoldingThisWeapon) {
 		//Allow fire if currentweaponslot same as this weaponslot
@@ -34,37 +37,16 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 			//Update current ammo
 			GetDynamicWeaponAttributes();
 
-			//Wait for player input every frame
-			GetPlayerInputInformation();
-
-			//true if semi weapon type
-			if (MasterWeapons->WeaponMechanic == EWeaponMechanic::SEMI) {
-				//check hitscan mechanic
-				if (MasterWeapons->IsHitScan) {
-					//Handle Fire
-					SemiHitScan();
-				}
-				else // if not go to projectile
-				{
-					//Handle Fire
-					SemiMechanic();
-				}
+			//check hitscan mechanic
+			if (MasterWeapons->IsHitScan) {
+				SemiHitScan();
+				UE_LOG(LogTemp, Warning, TEXT("SemiHitScan"));
 			}
-			
-			//true if auto weapon type
-			if (MasterWeapons->WeaponMechanic == EWeaponMechanic::AUTO)
+			else
 			{
-				//check hitscan mechanic
-				if (MasterWeapons->IsHitScan) {
-					//Handle Fire
-					//Auto+Hitscan
-				}
-				else // if not go to projectile
-				{
-					
-					//Handle Fire
-					AutomaticMechanic();
-				}
+				SemiMechanic();
+				AutomaticMechanic();
+				UE_LOG(LogTemp, Warning, TEXT("A1utoFire"));
 			}
 			//Handle firerate
 			FirerateControl(DeltaTime);
@@ -200,6 +182,8 @@ void UFireMechanicAuto::FinishReload() {
 void UFireMechanicAuto::GetPlayerInputInformation() {
 	//Get Control Class Everyframe
 	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	//get current holding weapon
+	currentWeapon = SpaceHorrorCharacter->WeaponSelecter;
 	//TODO some need change to get method
 	//Get FireInput Is Down?
 	IsInputFireDown = SpaceHorrorCharacter->IsFire;
@@ -207,7 +191,7 @@ void UFireMechanicAuto::GetPlayerInputInformation() {
 	IsInputFireUp = SpaceHorrorCharacter->IsFireInputUp;
 	//Get IsReloading Sequencing?
 	IsReload = SpaceHorrorCharacter->IsReload;
-	currentWeapon = SpaceHorrorCharacter->WeaponSelecter;
+	
 
 }
 
