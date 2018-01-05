@@ -33,6 +33,7 @@ void AMasterWeapons::BeginPlay()
 	//attach
 	//Check what weapon mechanic in this instance
 	updateWeaponMechanic(WeaponMechanic);
+
 	
 	currentAmmo = magazineCapacity; //TODO sync to upgrade class
 }

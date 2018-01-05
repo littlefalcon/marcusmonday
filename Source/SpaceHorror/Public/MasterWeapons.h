@@ -24,9 +24,6 @@ class SPACEHORROR_API AMasterWeapons : public AActor
 {
 	GENERATED_BODY()
 	
-	
-
-
 public:	
 	// Sets default values for this actor's properties
 	AMasterWeapons();

@@ -26,32 +26,52 @@ void UFireMechanicAuto::BeginPlay()
 void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	
+	//true if Player Currenty Holding this weapon
 	if (IsHoldingThisWeapon) {
-		//Update current ammo
-		GetDynamicWeaponAttributes();
-
-		//Wait for player input every frame
-		GetPlayerInputInformation();
-
-		//Handle Firing 
 		//Allow fire if currentweaponslot same as this weaponslot
-		if (currentWeapon == weaponSlot) {
-			if (MasterWeapons->IsHitScan) {
-				//SemiHitScan();
-			}
-			else
-			{
-				AutomaticMechanic();
-				SemiMechanic();
+		if (currentWeapon == weaponSlot) { //start check wep
+			//Update current ammo
+			GetDynamicWeaponAttributes();
+
+			//Wait for player input every frame
+			GetPlayerInputInformation();
+
+			//true if semi weapon type
+			if (MasterWeapons->WeaponMechanic == EWeaponMechanic::SEMI) {
+				//check hitscan mechanic
+				if (MasterWeapons->IsHitScan) {
+					//Handle Fire
+					SemiHitScan();
+				}
+				else // if not go to projectile
+				{
+					//Handle Fire
+					SemiMechanic();
+				}
 			}
 			
-		}
+			//true if auto weapon type
+			if (MasterWeapons->WeaponMechanic == EWeaponMechanic::AUTO)
+			{
+				//check hitscan mechanic
+				if (MasterWeapons->IsHitScan) {
+					//Handle Fire
+					//Auto+Hitscan
+				}
+				else // if not go to projectile
+				{
+					
+					//Handle Fire
+					AutomaticMechanic();
+				}
+			}
+			//Handle firerate
+			FirerateControl(DeltaTime);
 
-		//Handle firerate
-		FirerateControl(DeltaTime);
-
-		//Handle Reload
-		ReloadMechanic(DeltaTime);
+			//Handle Reload
+			ReloadMechanic(DeltaTime);
+		}//end check wep
 	}
 }
 
@@ -96,7 +116,7 @@ void UFireMechanicAuto::FirerateControl(float DeltaTime) {
 
 void UFireMechanicAuto::AutomaticMechanic() {
 	if (IsSemiMechanic) { return; } //return if semiautomatic gun
-
+	
 	if (canFire && IsInputFireDown) {
 		//return if reloading
 		if (IsReload) { return; };
@@ -104,7 +124,6 @@ void UFireMechanicAuto::AutomaticMechanic() {
 			canFire = false;
 			UE_LOG(LogTemp, Warning, TEXT("AutoFire"));
 	}
-
 }
 
 void UFireMechanicAuto::SemiMechanic() {

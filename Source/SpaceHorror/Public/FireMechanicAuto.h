@@ -60,8 +60,6 @@ private:
 	//Get Weapon Information
 	void GetWeaponAttributes();
 
-	
-
 	//Update Dynamic Weapon Information everyframe
 	void GetDynamicWeaponAttributes();
 

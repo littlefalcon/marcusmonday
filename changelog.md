@@ -1,3 +1,7 @@
+### SNL22 5/1/18 1726
+* refactor FireMechacnicAuto
+	* move most code in tick to check weapon block
+	* wip make weapon fire again
 ### SNL21 17/12/17 1726
 * change bullet color
 * add hitscan
