@@ -1,3 +1,5 @@
+### SNL24 7/1/18 1455
+* can't fix skeletal mesh bug so rework fire system next
 ### SNL23 5/1/18 1455
 * refactor FireMechacnicAuto
 	* change fire checker to hitscan or projectile (old is check semi or auto)

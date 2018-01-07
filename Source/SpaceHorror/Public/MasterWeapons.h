@@ -28,7 +28,7 @@ public:
 	// Sets default values for this actor's properties
 	AMasterWeapons();
 
-	UPROPERTY(BlueprintReadWrite, Category = WeaponSkeletal)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Skeletal)
 		class USkeletalMeshComponent* Weapon = NULL;
 
 

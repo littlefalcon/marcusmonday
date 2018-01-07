@@ -40,13 +40,11 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 			//check hitscan mechanic
 			if (MasterWeapons->IsHitScan) {
 				SemiHitScan();
-				UE_LOG(LogTemp, Warning, TEXT("SemiHitScan"));
 			}
 			else
 			{
 				SemiMechanic();
 				AutomaticMechanic();
-				UE_LOG(LogTemp, Warning, TEXT("A1utoFire"));
 			}
 			//Handle firerate
 			FirerateControl(DeltaTime);
