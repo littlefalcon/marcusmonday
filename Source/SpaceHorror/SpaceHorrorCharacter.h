@@ -90,6 +90,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 	uint32 bUsingMotionControllers : 1;
 
+	FVector getCameraComponentLocation();
+	FVector getCameraForwardVector();
+
 	void InputFireDown();
 
 	void InputFireUp();

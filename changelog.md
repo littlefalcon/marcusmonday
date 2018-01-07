@@ -1,4 +1,10 @@
-### SNL24 7/1/18 1455
+### SNL25 7/1/18 1953
+* make all visual in SEMI BP to c++ code
+	* add linetracebysinglechannel to c++
+	* add getcameralocation and forward  vector
+	* fix crash when not hit actor
+
+### SNL24 7/1/18 1534
 * can't fix skeletal mesh bug so rework fire system next
 ### SNL23 5/1/18 1455
 * refactor FireMechacnicAuto

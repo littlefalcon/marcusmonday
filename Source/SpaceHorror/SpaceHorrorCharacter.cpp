@@ -179,7 +179,7 @@ void ASpaceHorrorCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	MuzzleLocation = FP_MuzzleLocation->GetComponentLocation();
-
+	
 }
 
 void ASpaceHorrorCharacter::Reload() {
@@ -386,3 +386,14 @@ bool ASpaceHorrorCharacter::EnableTouchscreenMovement(class UInputComponent* Pla
 	}
 	return bResult;
 }
+
+
+FVector ASpaceHorrorCharacter::getCameraComponentLocation() {
+	return FirstPersonCameraComponent->GetComponentLocation();
+}
+
+FVector ASpaceHorrorCharacter::getCameraForwardVector() {
+	return FirstPersonCameraComponent->GetForwardVector();
+}
+
+//

@@ -3,6 +3,7 @@
 #include "FireMechanicAuto.h"
 #include "MasterWeapons.h"
 #include "SpaceHorrorCharacter.h"
+#include "DrawDebugHelpers.h" //TODO DELETE
 
 
 UFireMechanicAuto::UFireMechanicAuto()
@@ -60,6 +61,65 @@ void UFireMechanicAuto::SemiHitScan() { // BUG cant double function
 		if (canFire & IsInputFireDown) {
 			if (IsReload) { return; };
 			//HITSCANFIRE 
+		
+			FHitResult hit;
+			FColor traceColor = FColor::Red;
+			FVector startVector = SpaceHorrorCharacter->getCameraComponentLocation();;
+			FVector endVector = startVector + (SpaceHorrorCharacter->getCameraForwardVector() * 10000);
+			FCollisionQueryParams CollisionParams;
+
+			bool isHit = GetWorld()->LineTraceSingleByChannel(hit, startVector, endVector, ECollisionChannel::ECC_Visibility,CollisionParams);
+			
+			if(isHit) {
+				if (hit.bBlockingHit) {
+					if (hit.GetActor()) {
+						UE_LOG(LogTemp, Warning, TEXT("%s"), *hit.GetActor()->GetName());
+					}
+
+					{
+						UE_LOG(LogTemp, Error, TEXT(" Hit Other "));
+
+					}
+					traceColor = FColor::Green;
+					endVector = hit.Location;
+					
+				}
+				else
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Not Hit"));
+				}
+			}
+
+			
+			DrawDebugLine(GetWorld(), hit.TraceStart, endVector, traceColor, false, 10.0f, 0, 10.0f);
+
+			//END HITSCANFIRE 
+			IsPressFire = true;
+			MasterWeapons->Pressed = true;
+			//Spawn Bullet
+			//MasterWeapons->spawnParticleMuzzle();
+			//Fire Animation
+			//Fire Sound
+			//MasterWeapons->soundFire();
+			//DeceaseAmmo
+			MasterWeapons->decreaseAmmo(1);
+			//Update Ammo to HUD/UI
+			currentAmmo = MasterWeapons->getCurrentAmmo();
+			UE_LOG(LogTemp,Log, TEXT("currentAmmo = %d"), currentAmmo);
+			//HITSCANFIRE
+			canFire = false;
+			canFire = false;
+			SpaceHorrorCharacter->IsFireInputUp = false;
+		}
+	}
+}
+
+/*
+void UFireMechanicAuto::SemiHitScan() { // BUG cant double function
+	if (IsInputFireUp) {
+		if (canFire & IsInputFireDown) {
+			if (IsReload) { return; };
+			//HITSCANFIRE 
 			IsPressFire = true;
 			MasterWeapons->Pressed = true;
 			//Spawn Bullet
@@ -81,7 +141,7 @@ void UFireMechanicAuto::SemiHitScan() { // BUG cant double function
 		}
 	}
 }
-
+*/
 void UFireMechanicAuto::FirerateControl(float DeltaTime) {
 
 	if (!canFire) {

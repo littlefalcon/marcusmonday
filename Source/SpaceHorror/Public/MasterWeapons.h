@@ -146,7 +146,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
 		int weaponSlot;
 
-	
 
 	// Set base damage
 	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
