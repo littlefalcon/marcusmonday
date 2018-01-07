@@ -1,3 +1,6 @@
+### SNL26 8/1/18 0153
+* delete old semihitscan
+* found BP Bug fix by reparent
 ### SNL25 7/1/18 1953
 * make all visual in SEMI BP to c++ code
 	* add linetracebysinglechannel to c++

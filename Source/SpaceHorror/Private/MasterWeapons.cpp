@@ -83,12 +83,34 @@ void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 
 ///FUNCTION
 void AMasterWeapons::soundFire() {
-	UGameplayStatics::PlaySoundAtLocation(this, weaponSound, Weapon->GetSocketLocation(TEXT("Muzzle")), 1, 1, 0, nullptr, nullptr);
+	if (muzzleParticle == nullptr) {
+		UE_LOG(LogTemp, Error, TEXT("muzzleParticle Not Assign!"));
+	}
+	if (Weapon == nullptr) {
+		UE_LOG(LogTemp, Error, TEXT("Weapon Not Assign!"));
+	}
+	if (weaponSound == nullptr) {
+		UE_LOG(LogTemp, Error, TEXT("weaponSound Not Assign!"));
+	}
+
+	if (muzzleParticle != nullptr && Weapon != nullptr && weaponSound != nullptr) {
+		UGameplayStatics::PlaySoundAtLocation(this, weaponSound, Weapon->GetSocketLocation(TEXT("Muzzle")), 1, 1, 0, nullptr, nullptr);
+	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT("Some Actor Not Assign!"));
+	}
 }
 
 void AMasterWeapons::spawnParticleMuzzle()
 {
-	UGameplayStatics::SpawnEmitterAtLocation(this, muzzleParticle, Weapon->GetSocketLocation(TEXT("Muzzle")),FRotator::ZeroRotator,FVector::OneVector, true);
+	if (muzzleParticle != nullptr && Weapon != nullptr && weaponSound != nullptr) {
+		UGameplayStatics::SpawnEmitterAtLocation(this, muzzleParticle, Weapon->GetSocketLocation(TEXT("Muzzle")), FRotator::ZeroRotator, FVector::OneVector, true);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Some Actor Not Assign!"));
+	}
+	
 }
 
 void AMasterWeapons::spawnProjectileBullet() {

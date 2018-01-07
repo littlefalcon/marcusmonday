@@ -74,33 +74,34 @@ void UFireMechanicAuto::SemiHitScan() { // BUG cant double function
 				if (hit.bBlockingHit) {
 					if (hit.GetActor()) {
 						UE_LOG(LogTemp, Warning, TEXT("%s"), *hit.GetActor()->GetName());
+						traceColor = FColor::Green;
+						
 					}
-
+					else
 					{
 						UE_LOG(LogTemp, Error, TEXT(" Hit Other "));
-
+						traceColor = FColor::Yellow;
 					}
-					traceColor = FColor::Green;
 					endVector = hit.Location;
 					
 				}
 				else
 				{
 					UE_LOG(LogTemp, Warning, TEXT("Not Hit"));
+					traceColor = FColor::Red;
 				}
 			}
-
-			
+			//draw debug line when fire
 			DrawDebugLine(GetWorld(), hit.TraceStart, endVector, traceColor, false, 10.0f, 0, 10.0f);
 
 			//END HITSCANFIRE 
 			IsPressFire = true;
 			MasterWeapons->Pressed = true;
 			//Spawn Bullet
-			//MasterWeapons->spawnParticleMuzzle();
+			MasterWeapons->spawnParticleMuzzle();
 			//Fire Animation
 			//Fire Sound
-			//MasterWeapons->soundFire();
+			MasterWeapons->soundFire();
 			//DeceaseAmmo
 			MasterWeapons->decreaseAmmo(1);
 			//Update Ammo to HUD/UI
@@ -114,34 +115,6 @@ void UFireMechanicAuto::SemiHitScan() { // BUG cant double function
 	}
 }
 
-/*
-void UFireMechanicAuto::SemiHitScan() { // BUG cant double function
-	if (IsInputFireUp) {
-		if (canFire & IsInputFireDown) {
-			if (IsReload) { return; };
-			//HITSCANFIRE 
-			IsPressFire = true;
-			MasterWeapons->Pressed = true;
-			//Spawn Bullet
-			//MasterWeapons->spawnParticleMuzzle();
-			//Fire Animation
-			//Fire Sound
-			//MasterWeapons->soundFire();
-			//DeceaseAmmo
-			MasterWeapons->decreaseAmmo(1);
-			//Update Ammo to HUD/UI
-			currentAmmo = MasterWeapons->getCurrentAmmo();
-			UE_LOG(LogTemp, Warning, TEXT("currentAmmo = %d"), currentAmmo);
-			//HITSCANFIRE
-			canFire = false;
-			UE_LOG(LogTemp, Warning, TEXT("AutoFire"));
-			canFire = false;
-			SpaceHorrorCharacter->IsFireInputUp = false;
-			UE_LOG(LogTemp, Warning, TEXT("Hitfire"));
-		}
-	}
-}
-*/
 void UFireMechanicAuto::FirerateControl(float DeltaTime) {
 
 	if (!canFire) {
