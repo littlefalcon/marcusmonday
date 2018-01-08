@@ -1,3 +1,6 @@
+### SNL27 8/1/18 1725
+* fix childactor (BP_Semi) bug because of private member or no bpreadonly property
+
 ### SNL26 8/1/18 0153
 * delete old semihitscan
 * found BP Bug fix by reparent
