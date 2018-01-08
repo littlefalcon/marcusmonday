@@ -3,3 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+
+/*
+Store Quick Reference Code
+	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
+	UE_LOG(LogTemp, Log, TEXT("(%s)WP - SemiAutomatic"), *GetName());
+*/

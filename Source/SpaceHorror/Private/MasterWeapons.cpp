@@ -42,41 +42,35 @@ void AMasterWeapons::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AMasterWeapons::SemiHitScan()
-{
-	FireMechanicAuto->SemiHitScan();
-	
-}
-
 //Check Weapon Mechanic of this Weapon Blueprint
 void AMasterWeapons::updateWeaponMechanic(EWeaponMechanic WeaponMechanic) {
 	switch (WeaponMechanic)
 	{
 	case EWeaponMechanic::BEAM:
-		UE_LOG(LogTemp, Warning, TEXT("WP - Beam"));
+		UE_LOG(LogTemp, Log, TEXT("(%s)WP - Beam"), *GetName());
 		FireMechanicAuto->IsHoldingThisWeapon = false;
 		break;
 	case EWeaponMechanic::SEMI:
 		if (FireMechanicAuto != nullptr) {
-			UE_LOG(LogTemp, Warning, TEXT("WP - SemiAutomatic"));
+			UE_LOG(LogTemp, Log, TEXT("(%s)WP - SemiAutomatic"), *GetName());
 			FireMechanicAuto->IsHoldingThisWeapon = true;
-			FireMechanicAuto->IsSemiMechanic = true;
+			FireMechanicAuto->bSemiMechanic = true;
 		}
 		else {
-			UE_LOG(LogTemp, Warning, TEXT("WP - SemiAutomatic NOT FOUND"));
+			UE_LOG(LogTemp, Error, TEXT("(%s)WP - SemiAutomatic NOT FOUND"), *GetName());
 		}
 		break;
 	case EWeaponMechanic::AUTO:
 		if (FireMechanicAuto != nullptr) {
-			UE_LOG(LogTemp, Warning, TEXT("WP - Automatic"));
+			UE_LOG(LogTemp, Log, TEXT("(%s)WP - Automatic"));
 			FireMechanicAuto->IsHoldingThisWeapon = true;
-			FireMechanicAuto->IsSemiMechanic = false;
+			FireMechanicAuto->bSemiMechanic = false;
 		}else{
-			UE_LOG(LogTemp, Warning, TEXT("WP - Automatic NOT FOUND"));
+			UE_LOG(LogTemp, Error, TEXT("(%s)WP - Automatic NOT FOUND"),*GetName());
 		}
 		break;
 	case EWeaponMechanic::CHRG:
-		UE_LOG(LogTemp, Warning, TEXT("WP - Charge"));
+		UE_LOG(LogTemp, Warning, TEXT("(%s)WP - Charge"), *GetName());
 		break;
 	}
 }

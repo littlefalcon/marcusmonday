@@ -27,28 +27,33 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void SemiHitScan();
+	//Handle SemiFire +hitscan
+	void SemiHitscanMechanic(); //TODO make hitscanfire method
 
+	//Han
+	void HitscanFire();
+
+	//Enable fire mechanic when true
 	bool IsHoldingThisWeapon;
 
-	void Fire();
+	//Fire Projectile Bullet
+	void ProjectileFire();
 
+	//Handle fire repeatable
 	bool canFire = true;
 
-	bool IsHoldingTrigger;
+	//Counting fired time
+	float firedTimer;
 
-	bool IsPressFire;
-
-	float firedTimeCount = 0;
-
-	bool IsSemiMechanic = false;
+	//Check is SemiMechanic
+	bool bSemiMechanic = false;
 
 private:
 
 	//Weapon Information
 	AMasterWeapons* MasterWeapons = nullptr;
 
-	//Input Information
+	//Input Information / Camera Position
 	ASpaceHorrorCharacter* SpaceHorrorCharacter = nullptr;
 	
 	//Method convert firerate
@@ -108,10 +113,6 @@ private:
 	// Weapon Dynamic Attributes
 	int currentAmmo;
 	int currentBattery;
-
-	//DEV TEMP
-	//var checking for log 1 time if same number
-	int logCurrentAmmo;
 
 
 };

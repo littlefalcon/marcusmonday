@@ -45,11 +45,6 @@ class ASpaceHorrorCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UMotionControllerComponent* L_MotionController;
 	
-
-
-
-
-
 public:
 	ASpaceHorrorCharacter();
 

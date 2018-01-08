@@ -1,3 +1,9 @@
+### SNL28 8/1/18 2015
+* refactor FireMechacnicAuto
+	* change variable name
+	* delete some visual code in weapon bp
+	* make hitscanfire method
+
 ### SNL27 8/1/18 1725
 * fix childactor (BP_Semi) bug because of private member or no bpreadonly property
 

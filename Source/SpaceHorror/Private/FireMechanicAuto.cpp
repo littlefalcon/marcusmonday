@@ -20,6 +20,7 @@ void UFireMechanicAuto::BeginPlay()
 {
 	Super::BeginPlay();
 	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
+	//Get Weapon Attributes instance
 	GetWeaponAttributes();
 }
 
@@ -29,7 +30,7 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
 	//Wait for player input every frame
-	GetPlayerInputInformation();
+	GetPlayerInputInformation(); //Not optimize
 
 	//true if Player Currenty Holding this weapon
 	if (IsHoldingThisWeapon) {
@@ -40,9 +41,9 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 			//check hitscan mechanic
 			if (MasterWeapons->IsHitScan) {
-				SemiHitScan();
+				SemiHitscanMechanic();
 			}
-			else
+			else //if false to projectile mechanic
 			{
 				SemiMechanic();
 				AutomaticMechanic();
@@ -56,97 +57,103 @@ void UFireMechanicAuto::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	}
 }
 
-void UFireMechanicAuto::SemiHitScan() { // BUG cant double function
+void UFireMechanicAuto::SemiHitscanMechanic() { 
 	if (IsInputFireUp) {
 		if (canFire & IsInputFireDown) {
 			if (IsReload) { return; };
 			//HITSCANFIRE 
-		
-			FHitResult hit;
-			FColor traceColor = FColor::Red;
-			FVector startVector = SpaceHorrorCharacter->getCameraComponentLocation();;
-			FVector endVector = startVector + (SpaceHorrorCharacter->getCameraForwardVector() * 10000);
-			FCollisionQueryParams CollisionParams;
-
-			bool isHit = GetWorld()->LineTraceSingleByChannel(hit, startVector, endVector, ECollisionChannel::ECC_Visibility,CollisionParams);
+			HitscanFire();
 			
-			if(isHit) {
-				if (hit.bBlockingHit) {
-					if (hit.GetActor()) {
-						UE_LOG(LogTemp, Warning, TEXT("%s"), *hit.GetActor()->GetName());
-						traceColor = FColor::Green;
-						
-					}
-					else
-					{
-						UE_LOG(LogTemp, Error, TEXT(" Hit Other "));
-						traceColor = FColor::Yellow;
-					}
-					endVector = hit.Location;
-					
-				}
-				else
-				{
-					UE_LOG(LogTemp, Warning, TEXT("Not Hit"));
-					traceColor = FColor::Red;
-				}
-			}
-			//draw debug line when fire
-			DrawDebugLine(GetWorld(), hit.TraceStart, endVector, traceColor, false, 10.0f, 0, 10.0f);
-
-			//END HITSCANFIRE 
-			IsPressFire = true;
-			MasterWeapons->Pressed = true;
 			//Spawn Bullet
 			MasterWeapons->spawnParticleMuzzle();
 			//Fire Animation
+			
 			//Fire Sound
 			MasterWeapons->soundFire();
+			
 			//DeceaseAmmo
 			MasterWeapons->decreaseAmmo(1);
+			
 			//Update Ammo to HUD/UI
 			currentAmmo = MasterWeapons->getCurrentAmmo();
 			UE_LOG(LogTemp,Log, TEXT("currentAmmo = %d"), currentAmmo);
-			//HITSCANFIRE
-			canFire = false;
+			
+			//set fire to false and inputfire is pressing
 			canFire = false;
 			SpaceHorrorCharacter->IsFireInputUp = false;
 		}
 	}
 }
 
-void UFireMechanicAuto::FirerateControl(float DeltaTime) {
+void UFireMechanicAuto::HitscanFire() {
+	FHitResult hit; //store hit object reference
+	FColor traceColor = FColor::Red; //default trace color
+	
+	//bullet out position
+	FVector startVector = SpaceHorrorCharacter->getCameraComponentLocation();
+	//bullet move position (forward)
+	FVector endVector = startVector + (SpaceHorrorCharacter->getCameraForwardVector() * (fireRange * 1000));
+	
+	//return true if hit
+	bool isHit = GetWorld()->LineTraceSingleByChannel(hit, startVector, endVector, ECollisionChannel::ECC_Visibility);
 
+	if (isHit) {
+		//set endVector to impactposition
+		endVector = hit.ImpactPoint;
+		if (hit.bBlockingHit) {
+			if (hit.GetActor()) { //do if hit actor
+				UE_LOG(LogTemp, Warning, TEXT("%s"), *hit.GetActor()->GetName());
+				traceColor = FColor::Green;
+
+			}
+			else //do if hit not hit actor
+			{
+				UE_LOG(LogTemp, Error, TEXT(" Hit Other "));
+				traceColor = FColor::Yellow;
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Not Hit"));
+			traceColor = FColor::Red;
+		}
+
+		//draw debug line when hit
+		DrawDebugLine(GetWorld(), hit.TraceStart, endVector, traceColor, false, 10.0f, 0, 10.0f);
+	}
+
+}
+void UFireMechanicAuto::FirerateControl(float DeltaTime) {
 	if (!canFire) {
-		firedTimeCount += DeltaTime;
+		firedTimer += DeltaTime;
 		//canfire if cooldown time more than firerate and ammo is left in magazine
-		if (firedTimeCount > fireRate && !MasterWeapons->IsAmmoDepleted()) {
+		if (firedTimer > fireRate && !MasterWeapons->IsAmmoDepleted()) {
 			canFire = true;
-			firedTimeCount = 0;
+			firedTimer = 0;
 		}
 	}
 }
 
 void UFireMechanicAuto::AutomaticMechanic() {
-	if (IsSemiMechanic) { return; } //return if semiautomatic gun
+	if (bSemiMechanic) { return; } //return if semiautomatic gun
 	
-	if (canFire && IsInputFireDown) {
+	if (canFire && IsInputFireDown) { //do when canfire true and inputfire is press
 		//return if reloading
 		if (IsReload) { return; };
-			Fire();
+			ProjectileFire(); //fire projectile
 			canFire = false;
 			UE_LOG(LogTemp, Warning, TEXT("AutoFire"));
 	}
 }
 
 void UFireMechanicAuto::SemiMechanic() {
-	if (!IsSemiMechanic) { return; } //return if not semiautomatic gun
+	if (!bSemiMechanic) { return; } //return if not semiautomatic gun
 	
 	//release fire it will can fire 
 	if (IsInputFireUp) {
 		if (canFire & IsInputFireDown) {
 			if (IsReload) { return; };
-			Fire();
+			ProjectileFire();
 			canFire = false;
 			SpaceHorrorCharacter->IsFireInputUp = false;
 			UE_LOG(LogTemp, Warning, TEXT("SemiFire"));
@@ -165,15 +172,18 @@ void UFireMechanicAuto::ReloadMechanic(float DeltaTime) {
 	}
 }
 
-void UFireMechanicAuto::Fire() {
-	IsPressFire = true;
+void UFireMechanicAuto::ProjectileFire() {
+
 	//Spawn Bullet
 	MasterWeapons->spawnProjectileBullet(); // TODO make it dynamic
+	
 	//Muzzle Particle
 	MasterWeapons->spawnParticleMuzzle();
 	//Fire Animation
+	
 	//Fire Sound
 	MasterWeapons->soundFire();
+	
 	//DeceaseAmmo
 	MasterWeapons->decreaseAmmo(1);
 	

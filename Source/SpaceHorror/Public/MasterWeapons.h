@@ -40,8 +40,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintCallable, Category = "Combat")
-		void SemiHitScan();
 	//Set Weapon Mechanic
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Modify Panel")
 		EWeaponMechanic WeaponMechanic;
@@ -118,10 +116,6 @@ public:
 
 	void spawnProjectileBullet();
 
-	//todo delete
-	UPROPERTY(BlueprintReadWrite)
-	bool Pressed; 
-	
 private:
 
 	///DYNAMIC VARIABLES
