@@ -1,3 +1,7 @@
+### SNL28 15/1/18 1438
+* beam weapon now can fire 
+* fix by get parent(weapon) and get owner(of weapon) for access variable of BP_Beam
+
 ### SNL28 8/1/18 2015
 * refactor FireMechacnicAuto
 	* change variable name
