@@ -88,6 +88,12 @@ public:
 	int getFireRange();
 
 	int getCurrentBattery();
+
+	//get weapon muzzle position
+	FVector getWeaponMuzzlePosition();
+
+	FVector getWeaponForward();
+
 	//SET METHOD 
 	// decease ammo function
 	void decreaseAmmo(int amount);

@@ -1,3 +1,8 @@
+### SNL29 15/1/18 1505
+* move beam to c++
+* error access again wtf and crash too
+* done linetrace
+
 ### SNL28 15/1/18 1438
 * beam weapon now can fire 
 * fix by get parent(weapon) and get owner(of weapon) for access variable of BP_Beam

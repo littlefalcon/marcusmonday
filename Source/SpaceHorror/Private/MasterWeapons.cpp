@@ -234,6 +234,15 @@ EWeaponMechanic AMasterWeapons::getWeaponMechanic() {
 }
 
 
+FVector AMasterWeapons::getWeaponMuzzlePosition() {
+	return Weapon->GetSocketLocation(TEXT("Muzzle"));
+}
+
+FVector AMasterWeapons::getWeaponForward() {
+	return Weapon->GetForwardVector();
+}
+
+
 
 
 

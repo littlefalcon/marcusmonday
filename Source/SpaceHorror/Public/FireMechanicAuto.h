@@ -89,9 +89,6 @@ private:
 	//Weapon Slot Number
 	int weaponSlot;
 
-	//activate reload sequence
-	//bool IsReloading;
-
 	//Player Input Variables
 	bool IsReload;
 	bool IsInputFireUp;

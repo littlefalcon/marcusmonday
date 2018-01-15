@@ -22,6 +22,7 @@ void UFireMechanicAuto::BeginPlay()
 	SpaceHorrorCharacter = Cast<ASpaceHorrorCharacter>(GetWorld()->GetFirstPlayerController()->GetCharacter());
 	//Get Weapon Attributes instance
 	GetWeaponAttributes();
+	
 }
 
 
