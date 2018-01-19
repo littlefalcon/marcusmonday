@@ -109,7 +109,7 @@ void UFireMechanicAuto::HitscanFire() {
 			}
 			else //do if hit not hit actor
 			{
-				UE_LOG(LogTemp, Error, TEXT(" Hit Other "));
+				UE_LOG(LogTemp, Warning, TEXT(" Hit Other "));
 				traceColor = FColor::Yellow;
 			}
 		}

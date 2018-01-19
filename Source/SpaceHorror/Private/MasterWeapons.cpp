@@ -7,6 +7,7 @@
 #include "Animation/AnimInstance.h" // Handle SkeletalMesh
 #include "Kismet/GameplayStatics.h" //Handle Particle / Sound
 #include "SpaceHorrorProjectile.h" //Handle Projectile Bullet /TODO make this class itself
+#include "Runtime/Engine/Classes/Particles/Emitter.h" // beam weapon
 
 
 // Sets default values
@@ -21,6 +22,7 @@ AMasterWeapons::AMasterWeapons(){
 	Weapon->SetOnlyOwnerSee(true);		// only the owning player will see this mesh
 	Weapon->bCastDynamicShadow = false;
 	Weapon->CastShadow = false;
+
 }
 
 // Called when the game starts or when spawned
@@ -28,6 +30,14 @@ void AMasterWeapons::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (BP_Beam != nullptr) {
+		UE_LOG(LogTemp, Log, TEXT("Beam Found"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("Beam Not Found"));
+	}
+
 	//Attach to BP_FirstPersonCharacter
 	//attach
 	//Check what weapon mechanic in this instance

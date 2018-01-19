@@ -1,4 +1,9 @@
-### SNL29 15/1/18 1505
+### SNL30 18/1/18 2115
+* add emitter class
+* make bp_beam visual code to c++
+* stop doing weapon system
+
+### SNL29 15/1/18 1637
 * move beam to c++
 * error access again wtf and crash too
 * done linetrace

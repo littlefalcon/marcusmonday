@@ -31,7 +31,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Skeletal)
 		class USkeletalMeshComponent* Weapon = NULL;
 
-
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = BeamParticle)
+		class UChildActorComponent* BP_Beam = nullptr;
+		
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -110,7 +112,7 @@ public:
 
 	// sound data
 	UPROPERTY(EditAnywhere, Category = WeaponFX)
-	USoundBase* weaponSound = nullptr;
+		USoundBase* weaponSound = nullptr;
 
 	// particle data
 	UPROPERTY(EditAnywhere, Category = WeaponFX)
