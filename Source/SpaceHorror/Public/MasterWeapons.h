@@ -39,6 +39,14 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
+
+	//TODO use get 
+	UPROPERTY(BlueprintReadOnly)
+	int uCurrentAmmo;
+
+	UPROPERTY(BlueprintReadOnly)
+	int uMaxAmmo;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

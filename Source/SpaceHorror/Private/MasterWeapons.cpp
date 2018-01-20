@@ -44,6 +44,8 @@ void AMasterWeapons::BeginPlay()
 	updateWeaponMechanic(WeaponMechanic);
 	
 	currentAmmo = magazineCapacity; //TODO sync to upgrade class
+	uCurrentAmmo = currentAmmo;
+	uMaxAmmo = currentBattery;
 }
 
 // Called every frame
@@ -118,6 +120,7 @@ void AMasterWeapons::spawnParticleMuzzle()
 }
 
 void AMasterWeapons::spawnProjectileBullet() {
+	if (Weapon == nullptr) { return; }
 	if (ProjectileClass != NULL)
 	{
 		UWorld* const World = GetWorld();
@@ -146,11 +149,13 @@ void AMasterWeapons::decreaseAmmo(int amount) { //TODO Clamp amount
 	else
 	{
 		currentAmmo -= amount;
+		uCurrentAmmo = currentAmmo;
 	}
 }
 
 void AMasterWeapons::inceaseAmmo(int amount) {
 	currentAmmo += amount;
+	uCurrentAmmo = currentAmmo;
 }
 
 bool AMasterWeapons::IsAmmoDepleted() {
@@ -167,6 +172,7 @@ bool AMasterWeapons::IsAmmoDepleted() {
 
 void AMasterWeapons::setCurrentBattery(int newcurrentbattery)
 {
+	uMaxAmmo = newcurrentbattery; 
 	currentBattery = newcurrentbattery;
 }
 
@@ -245,6 +251,7 @@ EWeaponMechanic AMasterWeapons::getWeaponMechanic() {
 
 
 FVector AMasterWeapons::getWeaponMuzzlePosition() {
+	if (Weapon == nullptr) { return FVector(0); }
 	return Weapon->GetSocketLocation(TEXT("Muzzle"));
 }
 

@@ -1,3 +1,6 @@
+### SNL32 20/1/18 2115
+* add health ammo max ammo user interface
+
 ### SNL30 18/1/18 2115
 * add emitter class
 * make bp_beam visual code to c++
