@@ -1,3 +1,6 @@
+### SNL33 20/1/18 1506
+* main menu functionable
+* bug can shoot at mainmenu
 ### SNL32 20/1/18 2115
 * add health ammo max ammo user interface
 
