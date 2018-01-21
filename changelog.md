@@ -1,7 +1,10 @@
-### SNL34 21/1/18 1506
+### SNL35 21/1/18 1908
+* fix bug can shoot at main menu by change playercontroller
+
+### SNL34 21/1/18 1629
 * make mainmenu can load and pause exit to menu
 
-### SNL33 2ๅ/1/18 1506
+### SNL33 21/1/18 1506
 * main menu functionable
 * bug can shoot at mainmenu
 ### SNL32 20/1/18 2115
