@@ -1,7 +1,9 @@
-### SNL36 21/1/18 1908
-* add loading menu between level
 
-### SNL35 21/1/18 1908
+### SNL36 23/1/18 0214
+*  add all in game menu
+	* bug at weapon selector
+
+### SNL35 22/1/18 1810
 * fix bug can shoot at main menu by change playercontroller
 
 ### SNL34 21/1/18 1629
