@@ -1,3 +1,6 @@
+### SNL36 21/1/18 1908
+* add loading menu between level
+
 ### SNL35 21/1/18 1908
 * fix bug can shoot at main menu by change playercontroller
 
