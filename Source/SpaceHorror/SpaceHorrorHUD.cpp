@@ -17,6 +17,7 @@ ASpaceHorrorHUD::ASpaceHorrorHUD()
 
 void ASpaceHorrorHUD::DrawHUD()
 {
+	if (!bShowCrosshair) { return; }
 	Super::DrawHUD();
 
 	// Draw very simple crosshair

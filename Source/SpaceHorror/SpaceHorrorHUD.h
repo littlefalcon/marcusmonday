@@ -14,6 +14,9 @@ class ASpaceHorrorHUD : public AHUD
 public:
 	ASpaceHorrorHUD();
 
+	UPROPERTY(BlueprintReadWrite)
+		bool bShowCrosshair = true;
+
 	/** Primary draw call for the HUD */
 	virtual void DrawHUD() override;
 
