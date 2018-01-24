@@ -1,3 +1,11 @@
+### SNL39 25/1/18 0144
+* rework inventory / add inventory slot ui
+
+### SNL38 24/1/18 2303
+* add inventory asset / bp
+
+### SNL37 22/1/18 1810
+* add all in game menu
 
 ### SNL36 23/1/18 0214
 *  add all in game menu
