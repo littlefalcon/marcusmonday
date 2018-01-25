@@ -179,10 +179,12 @@ void ASpaceHorrorCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	MuzzleLocation = FP_MuzzleLocation->GetComponentLocation();
+
 	
 }
 
 void ASpaceHorrorCharacter::Reload() {
+	if (bMenuOpen) { return; }
 	IsReload = true;
 }
 
@@ -192,11 +194,13 @@ void ASpaceHorrorCharacter::setReload(bool setbool) {
 
 void ASpaceHorrorCharacter::InputFireDown()
 {
+	if (bMenuOpen) { return; }
 	IsFire = true;
 	IsFireInputDown = true;
 }
 
 void ASpaceHorrorCharacter::InputFireUp() {
+	if (bMenuOpen) { return; }
 	UE_LOG(LogTemp, Warning, TEXT("Relase Fire"));
 	IsFire = false;
 	IsFireInputUp = true;

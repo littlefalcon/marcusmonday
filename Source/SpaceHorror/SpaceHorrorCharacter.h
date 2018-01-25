@@ -168,6 +168,10 @@ public:
 	bool IsFireInputUp = true;
 	bool IsFireInputDown = false;
 	bool IsSemi = false;
+
+	UPROPERTY(BlueprintReadWrite)
+		bool bMenuOpen = false;
+
 private:
 	bool IsFiring = false;
 	
