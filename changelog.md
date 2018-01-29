@@ -1,3 +1,6 @@
+### SNL41 29/1/18 2134
+* change door blueprint to real door
+
 ### SNL39 25/1/18 0144
 * rework inventory / add inventory slot ui
 
