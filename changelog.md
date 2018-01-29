@@ -1,3 +1,9 @@
+### SNL43 30/1/18 0401
+* bind debugger in HUD BP
+* create DebugTemplate Function for debug style
+* add player variable to player bp
+* get weapon var by get player child actor and cast to weapon 
+
 ### SNL42 30/1/18 0132
 * setup debugger in HUD UI BP
 
