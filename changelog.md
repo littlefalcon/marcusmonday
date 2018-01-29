@@ -1,3 +1,6 @@
+### SNL42 30/1/18 0132
+* setup debugger in HUD UI BP
+
 ### SNL41 29/1/18 2134
 * change door blueprint to real door
 
