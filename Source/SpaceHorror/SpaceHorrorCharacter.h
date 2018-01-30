@@ -52,10 +52,19 @@ public:
 		class UChildActorComponent* DC_Gun = nullptr;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Weapon)
-		class UChildActorComponent* SA_GUN = nullptr;
+		class UChildActorComponent* FORCE_Gun = nullptr;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Weapon)
-		class UChildActorComponent* B_Gun = nullptr;
+		class UChildActorComponent* GR_Gun = nullptr;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Weapon)
+		class UChildActorComponent* LASER_Gun = nullptr;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Weapon)
+		class UChildActorComponent* RAIL_Gun = nullptr;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Weapon)
+		class UChildActorComponent* STUN_Gun = nullptr;
 
 protected:
 	virtual void BeginPlay();

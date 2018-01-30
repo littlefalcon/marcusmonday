@@ -86,11 +86,21 @@ ASpaceHorrorCharacter::ASpaceHorrorCharacter()
 	DC_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("DC_Gun"));
 	DC_Gun->SetupAttachment(RootComponent);
 	
-	SA_GUN = CreateDefaultSubobject<UChildActorComponent>(TEXT("SA_Gun"));
-	SA_GUN->SetupAttachment(RootComponent);
+	FORCE_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("FORCE_Gun"));
+	FORCE_Gun->SetupAttachment(RootComponent);
 
-	B_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("B_Gun"));
-	B_Gun->SetupAttachment(RootComponent);
+	GR_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("GR_Gun"));
+	GR_Gun->SetupAttachment(RootComponent);
+
+	LASER_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("LASER_Gun"));
+	LASER_Gun->SetupAttachment(RootComponent);
+
+	RAIL_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("RAIL_Gun"));
+	RAIL_Gun->SetupAttachment(RootComponent);
+
+	STUN_Gun = CreateDefaultSubobject<UChildActorComponent>(TEXT("STUN_Gun"));
+	STUN_Gun->SetupAttachment(RootComponent);
+	
 	
 }
 
@@ -102,8 +112,11 @@ void ASpaceHorrorCharacter::BeginPlay()
 	
 	//Attach Gun to Player BP
 	DC_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
-	SA_GUN->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
-	B_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	FORCE_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	GR_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	LASER_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	RAIL_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
+	STUN_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 
 	//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
 	FP_Gun->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
@@ -121,8 +134,11 @@ void ASpaceHorrorCharacter::BeginPlay()
 	}
 
 	DC_Gun->SetHiddenInGame(false, true);
-	SA_GUN->SetHiddenInGame(false, true);
-	B_Gun->SetHiddenInGame(false, true);
+	FORCE_Gun->SetHiddenInGame(false, true);
+	GR_Gun->SetHiddenInGame(false, true);
+	LASER_Gun->SetHiddenInGame(false, true);
+	RAIL_Gun->SetHiddenInGame(false, true);
+	STUN_Gun->SetHiddenInGame(false, true);
 
 	//Default select weapon
 	Weapon2();
@@ -212,10 +228,13 @@ void ASpaceHorrorCharacter::Weapon1()
 	{
 		WeaponSelecter = 0;
 		UE_LOG(LogTemp, Warning, TEXT("Select Door Cutter"));
-		B_Gun->SetHiddenInGame(false, true);
-
-		DC_Gun->SetHiddenInGame(true, true);
-		SA_GUN->SetHiddenInGame(true, true);
+		DC_Gun->SetHiddenInGame(false, true);
+		
+		GR_Gun->SetHiddenInGame(true, true);
+		FORCE_Gun->SetHiddenInGame(true, true);
+		LASER_Gun->SetHiddenInGame(true, true);
+		RAIL_Gun->SetHiddenInGame(true, true);
+		STUN_Gun->SetHiddenInGame(true, true);
 		
 	}
 }
@@ -226,10 +245,13 @@ void ASpaceHorrorCharacter::Weapon2()
 	{
 		WeaponSelecter = 1;
 		UE_LOG(LogTemp, Warning, TEXT("Select Gauss Rifle"));
-		DC_Gun->SetHiddenInGame(false, true);
-		
-		SA_GUN->SetHiddenInGame(true, true);
-		B_Gun->SetHiddenInGame(true, true);
+		GR_Gun->SetHiddenInGame(false, true);
+
+		DC_Gun->SetHiddenInGame(true, true);
+		FORCE_Gun->SetHiddenInGame(true, true);
+		LASER_Gun->SetHiddenInGame(true, true);
+		RAIL_Gun->SetHiddenInGame(true, true);
+		STUN_Gun->SetHiddenInGame(true, true);
 	}
 }
 
@@ -240,10 +262,13 @@ void ASpaceHorrorCharacter::Weapon3()
 	{
 		WeaponSelecter = 2;
 		UE_LOG(LogTemp, Warning, TEXT("Select Force Gun"));
-		SA_GUN->SetHiddenInGame(false, true);
+		FORCE_Gun->SetHiddenInGame(false, true);
 
+		GR_Gun->SetHiddenInGame(true, true);
+		LASER_Gun->SetHiddenInGame(true, true);
+		RAIL_Gun->SetHiddenInGame(true, true);
+		STUN_Gun->SetHiddenInGame(true, true);
 		DC_Gun->SetHiddenInGame(true, true);
-		B_Gun->SetHiddenInGame(true, true);
 
 	}
 }
@@ -255,6 +280,13 @@ void ASpaceHorrorCharacter::Weapon4()
 	{
 		WeaponSelecter = 3;
 		UE_LOG(LogTemp, Warning, TEXT("Select Laser Gun"));
+		LASER_Gun->SetHiddenInGame(false, true);
+
+		GR_Gun->SetHiddenInGame(true, true);
+		FORCE_Gun->SetHiddenInGame(true, true);
+		LASER_Gun->SetHiddenInGame(true, true);
+		RAIL_Gun->SetHiddenInGame(true, true);
+		STUN_Gun->SetHiddenInGame(true, true);
 	}
 }
 
@@ -265,6 +297,15 @@ void ASpaceHorrorCharacter::Weapon5()
 	{
 		WeaponSelecter = 4;
 		UE_LOG(LogTemp, Warning, TEXT("Select Rail Gun"));
+		RAIL_Gun->SetHiddenInGame(false, true);
+
+		GR_Gun->SetHiddenInGame(true, true);
+		FORCE_Gun->SetHiddenInGame(true, true);
+		LASER_Gun->SetHiddenInGame(true, true);
+		RAIL_Gun->SetHiddenInGame(true, true);
+		STUN_Gun->SetHiddenInGame(true, true);
+		DC_Gun->SetHiddenInGame(true, true);
+
 	}
 }
 
@@ -275,6 +316,13 @@ void ASpaceHorrorCharacter::Weapon6()
 	{
 		WeaponSelecter = 5;
 		UE_LOG(LogTemp, Warning, TEXT("Select Stun Gun"));
+		STUN_Gun->SetHiddenInGame(false, true);
+
+		GR_Gun->SetHiddenInGame(true, true);
+		FORCE_Gun->SetHiddenInGame(true, true);
+		LASER_Gun->SetHiddenInGame(true, true);
+		RAIL_Gun->SetHiddenInGame(true, true);
+		DC_Gun->SetHiddenInGame(true, true);
 	}
 }
 
