@@ -47,6 +47,10 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	int uMaxAmmo;
 
+	//current amount of battery carrying in inventory
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Modify Panel")
+	int currentBattery = 9999;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -174,9 +178,7 @@ private:
 		int batteryConsume = 2;
 
 	//TODO move to inventory class
-	//current amount of battery carrying in inventory
-	UPROPERTY(EditAnywhere, Category = "Weapon Modify Panel")
-		int currentBattery = 9999;
+	
 
 	// Calculated Battery Consume per Magazine
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Modify Panel")
