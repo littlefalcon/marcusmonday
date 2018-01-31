@@ -47,6 +47,9 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	int uMaxAmmo;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Modify Panel")
+		int weaponVariant;
+
 	//current amount of battery carrying in inventory
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Modify Panel")
 	int currentBattery = 9999;

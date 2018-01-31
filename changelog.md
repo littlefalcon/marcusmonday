@@ -1,3 +1,7 @@
+### SNL46 31/1/18 1517
+* add weapon variant variable at MasterWeapon Class.
+
+
 ### SNL43 30/1/18 0401
 * bind debugger in HUD BP
 * create DebugTemplate Function for debug style
