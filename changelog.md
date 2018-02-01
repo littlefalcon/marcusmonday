@@ -1,4 +1,7 @@
-### SNL33 31/1/18 1517
+### SNL54 02/2/18 1825
+* need to move add item from inventory widget to player
+
+### SNL53 31/1/18 1517
 * add MaxHealth to save
 * add function load on player
 
