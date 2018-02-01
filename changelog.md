@@ -1,6 +1,9 @@
+### SNL33 31/1/18 1517
+* add MaxHealth to save
+* add function load on player
+
 ### SNL46 31/1/18 1517
 * add weapon variant variable at MasterWeapon Class.
-
 
 ### SNL43 30/1/18 0401
 * bind debugger in HUD BP

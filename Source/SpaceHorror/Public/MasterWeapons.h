@@ -41,7 +41,7 @@ protected:
 public:	
 
 	//TODO use get 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadWrite)
 	int uCurrentAmmo;
 
 	UPROPERTY(BlueprintReadOnly)
