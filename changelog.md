@@ -1,3 +1,6 @@
+### SNL57 02/2/18 1543
+* fix save not save current ammo
+
 ### SNL56 02/2/18 1543
 * fix crash bug by not edit child doorcutter actor
 * make save button functionally
