@@ -1,3 +1,7 @@
+### SNL58 02/2/18 1543
+* make save editor with current ammo functionally
+* add blueprintcallable at C++ for setammo on BlueprintScripting
+
 ### SNL57 02/2/18 1543
 * fix save not save current ammo
 

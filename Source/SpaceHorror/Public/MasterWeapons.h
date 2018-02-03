@@ -40,11 +40,16 @@ protected:
 
 public:	
 
-	//TODO use get 
-	UPROPERTY(BlueprintReadWrite)
-	int uCurrentAmmo;
+	//E = Save Editor
+	UFUNCTION(BlueprintCallable)
+		void EsetCurrentAmmo(int NewAmmo);
 
-	UPROPERTY(BlueprintReadOnly)
+	//TODO use get 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int uCurrentAmmo;
+	
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int uMaxAmmo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Modify Panel")

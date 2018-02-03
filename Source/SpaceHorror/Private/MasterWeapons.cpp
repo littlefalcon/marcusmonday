@@ -119,6 +119,10 @@ void AMasterWeapons::spawnParticleMuzzle()
 	
 }
 
+void AMasterWeapons::EsetCurrentAmmo(int NewAmmo) {
+	setCurrentAmmo(NewAmmo);
+}
+
 void AMasterWeapons::spawnProjectileBullet() {
 	if (Weapon == nullptr) { return; }
 	if (ProjectileClass != NULL)
