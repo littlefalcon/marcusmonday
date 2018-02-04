@@ -1,4 +1,9 @@
-### SNL58 02/2/18 1543
+### SNL59 04/2/18 1543
+* add set craft item in save editor
+* add some set in save editor
+* insert array must replace with set array element because insert for add new array slot not replace new element to them
+
+### SNL58 03/2/18 1543
 * make save editor with current ammo functionally
 * add blueprintcallable at C++ for setammo on BlueprintScripting
 
