@@ -1,4 +1,8 @@
-### SNL60 04/2/18 1543
+### SNL61 04/2/18 1944
+* add all variable input reference to InGamemenu
+* add kill death bosskill set in save editor
+
+### SNL60 04/2/18 1413
 * add craft item debug
 
 ### SNL59 04/2/18 1351
