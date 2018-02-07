@@ -1,3 +1,8 @@
+### SNL65 07/2/18 1639
+* fix item save generate more than pickup because set array wrong!
+* fix item save after dropped that item
+* fixing item not heal + not correct attributes
+
 ### SNL61 04/2/18 1944
 * add all variable input reference to InGamemenu
 * add kill death bosskill set in save editor
