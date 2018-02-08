@@ -1,3 +1,8 @@
+### SNL66 07/2/18 1639
+* fix item not heal + not correct attributes
+* fix item save bug invisible but got slot
+	* because default value of Item Struct not set
+
 ### SNL65 07/2/18 1639
 * fix item save generate more than pickup because set array wrong!
 * fix item save after dropped that item
