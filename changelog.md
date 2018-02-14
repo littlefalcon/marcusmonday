@@ -1,3 +1,7 @@
+### SNL71 14/2/18 2207
+* add item can drop by random
+* fix collision preset to itemmaster
+
 ### SNL70 14/2/18 1746
 * fix collision preset at pawn for ignore bullet and make bullet can hit through itemmesh
 
