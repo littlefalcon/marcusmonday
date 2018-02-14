@@ -1,3 +1,7 @@
+### SNL68 14/2/18 1444
+* add dummy with random craft item drop when dead
+
+
 ### SNL67 14/2/18 1307
 * make craft item base on normal item
 	* can pickup
