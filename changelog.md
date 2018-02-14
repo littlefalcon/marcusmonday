@@ -1,3 +1,7 @@
+### SNL70 14/2/18 1746
+* fix collision preset at pawn for ignore bullet and make bullet can hit through itemmesh
+
+
 ### SNL69 14/2/18 1705
 * fix bug not show item name after move camera away from item and return camera back to that item
 	* fix by clamp return value when out of screen by GetViewportSize
