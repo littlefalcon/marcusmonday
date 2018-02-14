@@ -1,4 +1,8 @@
-### SNL68 14/2/18 1444
+### SNL69 14/2/18 1705
+* fix bug not show item name after move camera away from item and return camera back to that item
+	* fix by clamp return value when out of screen by GetViewportSize
+
+## SNL68 14/2/18 1502
 * add dummy with random craft item drop when dead
 
 
