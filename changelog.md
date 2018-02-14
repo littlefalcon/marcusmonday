@@ -1,3 +1,8 @@
+### SNL67 14/2/18 1307
+* make craft item base on normal item
+	* can pickup
+	* random amount and item type
+
 ### SNL66 07/2/18 1639
 * fix item not heal + not correct attributes
 * fix item save bug invisible but got slot
