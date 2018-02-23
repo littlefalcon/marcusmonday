@@ -1,3 +1,6 @@
+### SNL72 22/2/18 2052
+* add and rename of all map mesh
+
 ### SNL71 14/2/18 2207
 * add item can drop by random
 * fix collision preset to itemmaster
