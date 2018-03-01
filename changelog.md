@@ -1,3 +1,6 @@
+### SNL78 22/2/18 2052
+* make ai seeing player reference by detect rate 
+
 ### SNL72 22/2/18 2052
 * add and rename of all map mesh
 
