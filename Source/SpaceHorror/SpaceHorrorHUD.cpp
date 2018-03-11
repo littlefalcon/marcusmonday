@@ -12,7 +12,7 @@ ASpaceHorrorHUD::ASpaceHorrorHUD()
 	// Set the crosshair texture
 	static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshairTexObj(TEXT("/Game/StaticContent/FirstPerson/Textures/FirstPersonCrosshair"));
 	CrosshairTex = CrosshairTexObj.Object;
-	bShowCrosshair = true;
+	bShowCrosshair = false;
 }
 
 

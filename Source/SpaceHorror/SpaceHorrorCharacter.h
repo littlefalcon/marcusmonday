@@ -13,10 +13,7 @@ class ASpaceHorrorCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-	/** Pawn mesh: 1st person view (arms; seen only by self) */
-	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
-	class USkeletalMeshComponent* Mesh1P;
-
+	
 	/** Gun mesh: 1st person view (seen only by self) */
 	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
 	class USkeletalMeshComponent* FP_Gun;
@@ -47,6 +44,10 @@ class ASpaceHorrorCharacter : public ACharacter
 	
 public:
 	ASpaceHorrorCharacter();
+
+	/** Pawn mesh: 1st person view (arms; seen only by self) */
+	UPROPERTY(BlueprintReadWrite, Category = Mesh)
+		class USkeletalMeshComponent* Mesh1P;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Weapon) //TODO Make to Array
 		class UChildActorComponent* DC_Gun = nullptr;

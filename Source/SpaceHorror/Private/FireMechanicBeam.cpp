@@ -35,7 +35,7 @@ void UFireMechanicBeam::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 	// ...
 	//Wait for input
-	BeamMechanic();
+	//BeamMechanic();
 }
 
 void UFireMechanicBeam::GetDynamicWeaponAttributes()
@@ -79,7 +79,7 @@ void UFireMechanicBeam::BeamMechanic() {
 		}
 
 		//draw debug line when hit
-		DrawDebugLine(GetWorld(), hit.TraceStart, endVector, traceColor, false, 10.0f, 0, 10.0f);
+		//DrawDebugLine(GetWorld(), hit.TraceStart, endVector, traceColor, false, 10.0f, 0, 10.0f);
 	}
 
 
